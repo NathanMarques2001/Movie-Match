@@ -1,0 +1,6 @@
+Movie (Models\Movie)
+ [x] Deve pegar array com top rateds
+ [x] Deve econtrar o filme correto
+ [x] Deve econtrar o filme correto nos providers
+ [x] Deve econtrar quantidade correta de generos
+

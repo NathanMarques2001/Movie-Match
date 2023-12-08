@@ -1,0 +1,16 @@
+{
+    "autoload": {
+        "psr-4": {
+            "MovieMatch\\": "src/",
+            "MovieMatch\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*"
+    }
+}
