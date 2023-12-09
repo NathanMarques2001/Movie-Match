@@ -6,11 +6,12 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "guzzlehttp/guzzle": "^7.8"
+        "phpunit/phpunit": "*"
     },
     "require": {
         "ext-curl": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "php-ai/php-ml": "^0.10.0",
+        "guzzlehttp/guzzle": "^7.8"
     }
 }
