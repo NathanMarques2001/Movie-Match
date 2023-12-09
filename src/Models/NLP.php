@@ -19,7 +19,11 @@ class NLP
   // Extrai cada palavra e conta sua frequência em cada texto
   public function calculateFrequency(string $text)
   {
-    return array_count_values($this->tokenizer->tokenize(strtolower($text)));
+    $tokens = $this->tokenizer->tokenize(strtolower($text));
+    // Remove conectivos
+    $filteredTokens = array_diff($tokens, $this->connectives);
+
+    return array_count_values($filteredTokens);
   }
 
   // Função para calcular a similaridade dos cossenos
