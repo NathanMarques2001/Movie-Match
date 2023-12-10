@@ -2,6 +2,7 @@
 
 namespace MovieMatch\Models;
 
+use Dotenv\Dotenv;
 use GuzzleHttp\Client;
 
 class TMDBService
@@ -11,7 +12,10 @@ class TMDBService
 
     public function __construct()
     {
-        $this->apiKey = "b92d93c813e08c4c22bb45e911908d1d";
+        $path = dirname(__DIR__, 2);
+        $dotenv = Dotenv::createImmutable($path);
+        $dotenv->load();
+        $this->apiKey = $_ENV['API_KEY'];
         $this->baseURL = "https://api.themoviedb.org/3";
     }
 
