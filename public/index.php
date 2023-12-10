@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-</head>
+if (!isset($_SESSION)) {
+  session_start();
+}
 
-<body>
-  <form action="" method="POST">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email">
-    <label for="password">Senha</label>
-    <input type="password" name="password" id="password">
-    <button type="submit">Entrar</button>
-  </form>
-</body>
-
-</html>
+if (isset($_SESSION['id'])) {
+  header('location: ../src/Views/home.php');
+} else {
+  header('location: ../src/Views/login.php');
+}
