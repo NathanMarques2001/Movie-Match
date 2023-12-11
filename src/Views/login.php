@@ -1,19 +1,5 @@
 <?php
 
-require_once "../../vendor/autoload.php";
-
-use MovieMatch\Services\Auth;
-use MovieMatch\Services\Connection;
-
-$connection = new Connection();
-$auth = new Auth($connection->createConnection());
-
-$auth->sessionExists();
-
-if (isset($_POST['email']) && isset($_POST['password'])) {
-  $auth->login($_POST['email'], $_POST['password']);
-}
-
 ?>
 
 <!DOCTYPE html>

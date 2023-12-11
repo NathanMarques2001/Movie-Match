@@ -1,22 +1,22 @@
 <?php
 
-require_once "../../vendor/autoload.php";
+// require_once __DIR__ . "/../../vendor/autoload.php";
 
-use MovieMatch\Services\Auth;
-use MovieMatch\Services\Connection;
+// use MovieMatch\Services\Auth;
+// use MovieMatch\Services\Connection;
 
-if (!isset($_SESSION)) {
-  session_start();
-}
+// if (!isset($_SESSION)) {
+//   session_start();
+// }
 
-$connection = new Connection();
-$auth = new Auth($connection->createConnection());
+// $connection = new Connection();
+// $auth = new Auth($connection->createConnection());
 
-$auth->protect();
+// //$auth->protect();
 
-if (isset($_GET['logout'])) {
-  $auth->logout();
-}
+// if (isset($_GET['logout'])) {
+//   $auth->logout();
+// }
 
 ?>
 
@@ -34,7 +34,7 @@ if (isset($_GET['logout'])) {
     <?php echo $_SESSION['name'] ?>!
   </h1>
 
-  <a href="?logout=true">Sair</a>
+  <!-- <a href="?logout=true">Sair</a> -->
 </body>
 
 </html>
