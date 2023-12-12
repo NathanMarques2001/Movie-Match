@@ -1,4 +1,8 @@
+Options -Indexes
+
 RewriteEngine on
 
-RewriteRule ^([a-z-0-9]+)/?$ ./index.php
-RewriteRule ^([a-z-0-9]+)/([a-z-0-9]+)/?$ ./index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php [NC,QSA]
