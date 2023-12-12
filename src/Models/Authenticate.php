@@ -53,7 +53,7 @@ class Authenticate
 
     session_destroy();
 
-    header("Location: ../Views/login.php");
+    header("Location: /");
   }
 
   public function protect()
@@ -64,17 +64,6 @@ class Authenticate
 
     if (!isset($_SESSION['id'])) {
       header('Location: ../Views/login.php');
-    }
-  }
-
-  public function sessionExists()
-  {
-    if (!isset($_SESSION)) {
-      session_start();
-    }
-
-    if (isset($_SESSION['id'])) {
-      header('location: ../Views/home.php');
     }
   }
 }

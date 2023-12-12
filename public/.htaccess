@@ -1,0 +1,4 @@
+RewriteEngine on
+
+RewriteRule ^([a-z-0-9]+)/?$ ./index.php
+RewriteRule ^([a-z-0-9]+)/([a-z-0-9]+)/?$ ./index.php

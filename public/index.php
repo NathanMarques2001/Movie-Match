@@ -9,13 +9,18 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-$pathInfo = $_SERVER['PATH_INFO'] ?? '/';
+$pathInfo = $_SERVER['REQUEST_URI'] ?? '/';
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $key = "$httpMethod|$pathInfo";
 
 if (!isset($_SESSION['id'])) {
   $loginController = new LoginController();
   $loginController->renderLoginPage();
+  if ($httpMethod === "GET") {
+    $loginController->renderLoginPage();
+  } else {
+    $loginController->processLogin();
+  }
 } else {
   if ($pathInfo === "/") {
     $loginController = new LoginController();
@@ -28,6 +33,8 @@ if (!isset($_SESSION['id'])) {
     $homeController = new HomeController();
     if ($httpMethod === "GET") {
       $homeController->renderHomePage();
+    } else {
+      $homeController->logout();
     }
   }
 }

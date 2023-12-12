@@ -27,7 +27,7 @@ class LoginController
 
       // Chame o método de login do serviço de autenticação
       if ($this->auth->login($email, $password)) {
-        require_once __DIR__ . '/../Views/home.php';
+        header('Location: /home');
       }
     }
   }
