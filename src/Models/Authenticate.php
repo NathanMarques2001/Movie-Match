@@ -55,4 +55,8 @@ class Authenticate
 
     header("Location: /");
   }
+
+  public function signup()
+  {
+  }
 }

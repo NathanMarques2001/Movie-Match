@@ -4,6 +4,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 use MovieMatch\Controllers\HomeController;
 use MovieMatch\Controllers\LoginController;
+use MovieMatch\Controllers\SignupController;
 
 if (!isset($_SESSION)) {
   session_start();
@@ -14,14 +15,6 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $key = "$httpMethod|$pathInfo";
 
 if (!isset($_SESSION['id'])) {
-  $loginController = new LoginController();
-  $loginController->renderLoginPage();
-  if ($httpMethod === "GET") {
-    $loginController->renderLoginPage();
-  } else {
-    $loginController->processLogin();
-  }
-} else {
   if ($pathInfo === "/") {
     $loginController = new LoginController();
     if ($httpMethod === "GET") {
@@ -29,7 +22,16 @@ if (!isset($_SESSION['id'])) {
     } else if (isset($_POST["Login"])) {
       $loginController->processLogin();
     }
-  } else if ($pathInfo === "/home") {
+  } else if ($pathInfo === "/signup") {
+    $signupController = new SignupController();
+    if ($httpMethod === "GET") {
+      $signupController->renderSignupPage();
+    } else if (isset($_POST["Signup"])) {
+      //Criar conta
+    }
+  }
+} else {
+  if ($pathInfo === "/" || $pathInfo === "/home") {
     $homeController = new HomeController();
     if ($httpMethod === "GET") {
       $homeController->renderHomePage();
