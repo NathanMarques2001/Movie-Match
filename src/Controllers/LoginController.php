@@ -15,7 +15,7 @@ class LoginController
 
   public function renderLoginPage(): void
   {
-    require_once __DIR__ . '/../Views/login.php';
+    require_once __DIR__ . '/../../templates/views/login.php';
   }
 
   public function processLogin(): void
@@ -25,7 +25,6 @@ class LoginController
       $email = $_POST['email'] ?? '';
       $password = $_POST['password'] ?? '';
 
-      // Chame o método de login do serviço de autenticação
       if ($this->auth->login($email, $password)) {
         header('Location: /home');
       }

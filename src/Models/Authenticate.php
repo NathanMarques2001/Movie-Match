@@ -55,15 +55,4 @@ class Authenticate
 
     header("Location: /");
   }
-
-  public function protect()
-  {
-    if (!isset($_SESSION)) {
-      session_start();
-    }
-
-    if (!isset($_SESSION['id'])) {
-      header('Location: ../Views/login.php');
-    }
-  }
 }

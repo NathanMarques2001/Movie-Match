@@ -12,7 +12,7 @@ class HomeController
 
   public function renderHomePage(): void
   {
-    require_once __DIR__ . '/../Views/home.php';
+    require_once __DIR__ . '/../../templates/views/home.php';
   }
 
   public function logout(): void

@@ -26,14 +26,14 @@ if (!isset($_SESSION['id'])) {
     $loginController = new LoginController();
     if ($httpMethod === "GET") {
       $loginController->renderLoginPage();
-    } else {
+    } else if (isset($_POST["Login"])) {
       $loginController->processLogin();
     }
   } else if ($pathInfo === "/home") {
     $homeController = new HomeController();
     if ($httpMethod === "GET") {
       $homeController->renderHomePage();
-    } else {
+    } else if (isset($_POST["Logout"])) {
       $homeController->logout();
     }
   }

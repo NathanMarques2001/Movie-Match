@@ -1,15 +1,4 @@
-<?php
-
-?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+<?php require_once __DIR__ . "/../../templates/layout/header.html"; ?>
 
 <body>
   <form action="" method="POST">
@@ -17,8 +6,8 @@
     <input type="email" name="email" id="email">
     <label for="password">Senha</label>
     <input type="password" name="password" id="password">
-    <button type="submit">Entrar</button>
+    <button type="submit" name="Login">Entrar</button>
   </form>
 </body>
 
-</html>
+<?php require_once __DIR__ . "/../../templates/layout/footer.html"; ?>
