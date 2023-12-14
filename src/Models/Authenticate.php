@@ -17,28 +17,29 @@ class Authenticate
 
   public function login(string $email, string $password)
   {
-    if (strlen($email) > 0 && strlen($password) > 0) {
-      $query = "SELECT * FROM users WHERE email = ? LIMIT 1;";
-
-      $stmt = $this->connection->prepare($query);
-      $stmt->bindValue(1, $email);
-
-      if ($stmt->execute()) {
-        $user = $stmt->fetch();
-        if ($user) {
-          if (password_verify($password, $user['password'])) {
-            return $user;
-          } else {
-            echo "Email ou senha incorretos!";
-            return false;
-          }
-        }
-        echo "Usuário não encontrado!";
-        return false;
-      }
+    if (empty($email) || empty(trim($password))) {
+      echo 'Nome e senha devem ser preenchidos!';
+      return false;
     }
-    echo 'Email e senha devem ser preenchidos!';
-    return false;
+    
+    $query = "SELECT * FROM users WHERE email = ? LIMIT 1;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $email);
+
+    if ($stmt->execute()) {
+      $user = $stmt->fetch();
+      if ($user) {
+        if (password_verify($password, $user['password'])) {
+          return $user;
+        } else {
+          echo "Email ou senha incorretos!";
+          return false;
+        }
+      }
+      echo "Usuário não encontrado!";
+      return false;
+    }
   }
 
   public function logout()
