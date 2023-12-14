@@ -15,7 +15,7 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $key = "$httpMethod|$pathInfo";
 
 if (!isset($_SESSION['id'])) {
-  if ($pathInfo === "/") {
+  if ($pathInfo !== "/signup") {
     $loginController = new LoginController();
     if ($httpMethod === "GET") {
       $loginController->renderLoginPage();
@@ -27,7 +27,7 @@ if (!isset($_SESSION['id'])) {
     if ($httpMethod === "GET") {
       $signupController->renderSignupPage();
     } else if (isset($_POST["Signup"])) {
-      //Criar conta
+      $signupController->processSignup();
     }
   }
 } else {

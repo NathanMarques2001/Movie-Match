@@ -18,30 +18,26 @@ class Authenticate
   public function login(string $email, string $password)
   {
     if (strlen($email) > 0 && strlen($password) > 0) {
-      $query = "SELECT * FROM users WHERE email = ? AND password = ? LIMIT 1;";
+      $query = "SELECT * FROM users WHERE email = ? LIMIT 1;";
 
       $stmt = $this->connection->prepare($query);
       $stmt->bindValue(1, $email);
-      $stmt->bindValue(2, $password);
 
       if ($stmt->execute()) {
         $user = $stmt->fetch();
         if ($user) {
-          if (!isset($_SESSION)) {
-            session_start();
+          if (password_verify($password, $user['password'])) {
+            return $user;
+          } else {
+            echo "Email ou senha incorretos!";
+            return false;
           }
-
-          $_SESSION['id'] = $user['id'];
-          $_SESSION['name'] = $user['name'];
-
-          return true;
-        } else {
-          return false;
         }
+        echo "Usuário não encontrado!";
+        return false;
       }
-    } else {
-      echo 'Usuário e senha devem ser preenchidos';
     }
+    echo 'Email e senha devem ser preenchidos!';
     return false;
   }
 
@@ -50,13 +46,49 @@ class Authenticate
     if (!isset($_SESSION)) {
       session_start();
     }
-
     session_destroy();
-
-    header("Location: /");
   }
 
-  public function signup()
+  public function signup(string $name, string $email, string $password)
   {
+    if (empty($name) || empty($email) || empty(trim($password))) {
+      echo 'Nome, email e senha devem ser preenchidos!';
+      return false;
+    }
+
+    if ($this->checkEmail($email)) {
+      echo "Email já cadastrado!";
+      return false;
+    }
+
+    $query = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $name);
+    $stmt->bindValue(2, $email);
+    $stmt->bindValue(3, password_hash($password, PASSWORD_DEFAULT));
+
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    echo 'Erro ao cadastrar usuário!';
+    return false;
+  }
+
+  private function checkEmail(string $email)
+  {
+    $query = "SELECT * FROM users WHERE email = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $email);
+
+    if ($stmt->execute()) {
+      $user = $stmt->fetch();
+      if ($user) {
+        return true;
+      }
+      return false;
+    }
   }
 }

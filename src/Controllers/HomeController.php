@@ -19,5 +19,6 @@ class HomeController
   {
     $auth = new Authenticate();
     $auth->logout();
+    header("Location: /");
   }
 }

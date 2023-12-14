@@ -25,7 +25,16 @@ class LoginController
       $email = $_POST['email'] ?? '';
       $password = $_POST['password'] ?? '';
 
-      if ($this->auth->login($email, $password)) {
+      $login = $this->auth->login($email, $password);
+
+      if ($login !== false) {
+        if (!isset($_SESSION)) {
+          session_start();
+        }
+
+        $_SESSION['id'] = $login['id'];
+        $_SESSION['name'] = $login['name'];
+
         header('Location: /home');
       }
     }
