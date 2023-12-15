@@ -53,9 +53,7 @@ class TMDBService
 
     public function getImage(string $path)
     {
-        $finalURL = "https://image.tmdb.org/t/p/w300/" . $path;
-
-        return $this->buildRequest($finalURL, 'Content-Type: image/jpeg');
+        return "https://image.tmdb.org/t/p/w300/" . $path;
     }
 
     private function buildRequest(string $url, string $contentType)

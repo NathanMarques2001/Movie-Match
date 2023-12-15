@@ -1,25 +1,25 @@
 <?php
 
 use MovieMatch\Models\TMDBService;
-// <?= $tmdb->getImage($film->backdrop_path); 
+
 $tmdb = new TMDBService();
-$result = $tmdb->getTopRated(1);
+$currentPage = 1;
+$result = $tmdb->getTopRated($currentPage);
 $films = $result->results;
 ?>
 
-<?php foreach ($films as $film) : ?>
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
+<div id="films-container">
+  <h1>Recomendações de Filmes</h1>
+  <main id="films-list">
+    <?php foreach ($films as $film) : ?>
+      <div class="card mb-3" style="max-width: 18rem;">
+        <img src="<?= $tmdb->getImage($film->backdrop_path); ?>" class="card-img-top" alt="Pôster - <?= $film->title ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->title ?></h5>
-          <p class="card-text"><?= $film->overview ?></p>
-          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          <p class="card-text" style="max-width: 18rem; height: 320px; overflow: hidden;"><?= $film->overview ?></p>
+          <a href="http://moviematch.com/movie-detail/<?= $film->id ?>" class="btn btn-primary">Mais Detalhes</a>
         </div>
       </div>
-    </div>
-  </div>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+  </main>
+</div>

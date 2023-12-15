@@ -38,5 +38,7 @@ if (!isset($_SESSION['id'])) {
     } else if (isset($_POST["Logout"])) {
       $homeController->logout();
     }
+  } else if (strpos($pathInfo, "/movie-detail") !== false) {
+    require_once __DIR__ . "/../templates/views/filmDetail.php";
   }
 }
