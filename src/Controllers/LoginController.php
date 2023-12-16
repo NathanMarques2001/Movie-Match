@@ -34,6 +34,7 @@ class LoginController
 
         $_SESSION['id'] = $login['id'];
         $_SESSION['name'] = $login['name'];
+        $_SESSION['currentPage'] = 1;
 
         header('Location: /home');
       }

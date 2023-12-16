@@ -3,9 +3,11 @@
 use MovieMatch\Models\TMDBService;
 
 $tmdb = new TMDBService();
-$currentPage = 1;
+$currentPage = $_GET['page'] ?? 1;
+
 $result = $tmdb->getTopRated($currentPage);
 $films = $result->results;
+
 ?>
 
 <div id="films-container">
@@ -22,4 +24,7 @@ $films = $result->results;
       </div>
     <?php endforeach; ?>
   </main>
+  <form action="http://moviematch.com/home" method="POST">
+    <button type="submit" class="btn btn-primary btn-lg mb-3" name="changeMovies">Novas recomendações</button>
+  </form>
 </div>

@@ -1,6 +1,7 @@
 <?php
 
 namespace MovieMatch\Models;
+
 class Movie
 {
     private string $title;
@@ -9,6 +10,16 @@ class Movie
     private array $genres;
     private string $imagePath;
     private array $streamings;
+
+    public function __construct(string $title, string $overview, string $year, array $genres, string $imagePath, array $streamings)
+    {
+        $this->title = $title;
+        $this->overview = $overview;
+        $this->year = $year;
+        $this->genres = $genres;
+        $this->imagePath = $imagePath;
+        $this->streamings = $streamings;
+    }
 
     public function getTitle(): string
     {

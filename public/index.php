@@ -31,14 +31,16 @@ if (!isset($_SESSION['id'])) {
     }
   }
 } else {
-  if ($pathInfo === "/" || $pathInfo === "/home") {
+  if (strpos($pathInfo, "/movie-detail") !== false) {
+    require_once __DIR__ . "/../templates/views/filmDetail.php";
+  } else {
     $homeController = new HomeController();
     if ($httpMethod === "GET") {
       $homeController->renderHomePage();
     } else if (isset($_POST["Logout"])) {
       $homeController->logout();
+    } else if (isset($_POST["changeMovies"])) {
+      $homeController->loadOtherMovies();
     }
-  } else if (strpos($pathInfo, "/movie-detail") !== false) {
-    require_once __DIR__ . "/../templates/views/filmDetail.php";
   }
 }
