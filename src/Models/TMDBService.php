@@ -56,6 +56,11 @@ class TMDBService
         return "https://image.tmdb.org/t/p/w300/" . $path;
     }
 
+    public function getBackground(string $path)
+    {
+        return "https://image.tmdb.org/t/p/w500/" . $path;
+    }
+
     private function buildRequest(string $url, string $contentType)
     {
         $client = new Client([

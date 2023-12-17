@@ -2,7 +2,7 @@
 
 namespace MovieMatch\Controllers;
 
-use MovieMatch\Models\Authenticate;
+use MovieMatch\Models\TMDBService;
 
 class HomeController
 {
@@ -18,11 +18,14 @@ class HomeController
     require_once __DIR__ . '/../../templates/views/home.php';
   }
 
-  public function logout(): void
+  public function loadFilms()
   {
-    $auth = new Authenticate();
-    $auth->logout();
-    header("Location: /");
+    $tmdb = new TMDBService();
+    $currentPage = $_GET['page'] ?? 1;
+
+    $result = $tmdb->getTopRated($currentPage);
+
+    return $result->results;
   }
 
   public function loadOtherMovies(): void
@@ -34,6 +37,5 @@ class HomeController
     $_SESSION['currentPage'] = $newPage;
 
     header("Location: http://moviematch.com/home?page=$newPage");
-    exit(); // Certifique-se de sair após o redirecionamento
   }
 }

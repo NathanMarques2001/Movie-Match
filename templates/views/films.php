@@ -1,12 +1,12 @@
 <?php
 
+use MovieMatch\Controllers\HomeController;
 use MovieMatch\Models\TMDBService;
 
+$homeController = new HomeController();
 $tmdb = new TMDBService();
-$currentPage = $_GET['page'] ?? 1;
 
-$result = $tmdb->getTopRated($currentPage);
-$films = $result->results;
+$films = $homeController->loadFilms();
 
 ?>
 
@@ -18,7 +18,7 @@ $films = $result->results;
         <img src="<?= $tmdb->getImage($film->backdrop_path); ?>" class="card-img-top" alt="Pôster - <?= $film->title ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->title ?></h5>
-          <p class="card-text" style="max-width: 18rem; height: 320px; overflow: hidden;"><?= $film->overview ?></p>
+          <p class="card-text" style="max-width: 18rem; height: 320px; overflow: auto;"><?= $film->overview ?></p>
           <a href="http://moviematch.com/movie-detail/<?= $film->id ?>" class="btn btn-primary">Mais Detalhes</a>
         </div>
       </div>

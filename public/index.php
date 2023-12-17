@@ -2,9 +2,8 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use MovieMatch\Controllers\AuthenticateController;
 use MovieMatch\Controllers\HomeController;
-use MovieMatch\Controllers\LoginController;
-use MovieMatch\Controllers\SignupController;
 
 if (!isset($_SESSION)) {
   session_start();
@@ -15,30 +14,31 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $key = "$httpMethod|$pathInfo";
 
 if (!isset($_SESSION['id'])) {
+  $authenticateController = new AuthenticateController();
   if ($pathInfo !== "/signup") {
-    $loginController = new LoginController();
     if ($httpMethod === "GET") {
-      $loginController->renderLoginPage();
+      $authenticateController->renderLoginPage();
     } else if (isset($_POST["Login"])) {
-      $loginController->processLogin();
+      $authenticateController->processLogin();
     }
   } else if ($pathInfo === "/signup") {
-    $signupController = new SignupController();
     if ($httpMethod === "GET") {
-      $signupController->renderSignupPage();
+      $authenticateController->renderSignupPage();
     } else if (isset($_POST["Signup"])) {
-      $signupController->processSignup();
+      $authenticateController->processSignup();
     }
   }
 } else {
+  $authenticateController = new AuthenticateController();
+  $homeController = new HomeController();
+  if (isset($_POST["Logout"])) {
+    $authenticateController->logout();
+  }
   if (strpos($pathInfo, "/movie-detail") !== false) {
-    require_once __DIR__ . "/../templates/views/filmDetail.php";
+    require_once __DIR__ . "/../templates/views/movie-detail.php";
   } else {
-    $homeController = new HomeController();
     if ($httpMethod === "GET") {
       $homeController->renderHomePage();
-    } else if (isset($_POST["Logout"])) {
-      $homeController->logout();
     } else if (isset($_POST["changeMovies"])) {
       $homeController->loadOtherMovies();
     }
