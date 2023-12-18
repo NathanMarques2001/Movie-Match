@@ -1,0 +1,92 @@
+{
+  "id": 238,
+  "results": {
+    "BR": {
+      "link": "https://www.themoviedb.org/movie/238-the-godfather/watch?locale=BR",
+      "rent": [
+        {
+          "logo_path": "/lJT7r1nprk1Z8t1ywiIa8h9d3rc.jpg",
+          "provider_id": 167,
+          "provider_name": "Claro video",
+          "display_priority": 4
+        },
+        {
+          "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+          "provider_id": 2,
+          "provider_name": "Apple TV",
+          "display_priority": 8
+        },
+        {
+          "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+          "provider_id": 10,
+          "provider_name": "Amazon Video",
+          "display_priority": 15
+        },
+        {
+          "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+          "provider_id": 3,
+          "provider_name": "Google Play Movies",
+          "display_priority": 16
+        },
+        {
+          "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+          "provider_id": 68,
+          "provider_name": "Microsoft Store",
+          "display_priority": 17
+        }
+      ],
+      "flatrate": [
+        {
+          "logo_path": "/hR9vWd8hWEVQKD6eOnBneKRFEW3.jpg",
+          "provider_id": 619,
+          "provider_name": "Star Plus",
+          "display_priority": 3
+        },
+        {
+          "logo_path": "/xbhHHa1YgtpwhC8lb1NQ3ACVcLd.jpg",
+          "provider_id": 531,
+          "provider_name": "Paramount Plus",
+          "display_priority": 6
+        },
+        {
+          "logo_path": "/1bbExrGyEuUFAEWMBSN76bwacQ0.jpg",
+          "provider_id": 499,
+          "provider_name": "Oldflix",
+          "display_priority": 25
+        },
+        {
+          "logo_path": "/9pdeflA0P1b8qlkeDA1oLfyvR06.jpg",
+          "provider_id": 1853,
+          "provider_name": "Paramount Plus Apple TV Channel ",
+          "display_priority": 68
+        }
+      ],
+      "buy": [
+        {
+          "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+          "provider_id": 2,
+          "provider_name": "Apple TV",
+          "display_priority": 8
+        },
+        {
+          "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+          "provider_id": 10,
+          "provider_name": "Amazon Video",
+          "display_priority": 15
+        },
+        {
+          "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+          "provider_id": 3,
+          "provider_name": "Google Play Movies",
+          "display_priority": 16
+        },
+        {
+          "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+          "provider_id": 68,
+          "provider_name": "Microsoft Store",
+          "display_priority": 17
+        }
+      ]
+    }
+  }
+}

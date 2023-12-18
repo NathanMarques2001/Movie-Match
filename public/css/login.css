@@ -9,6 +9,7 @@
 #login-container {
   flex-direction: column;
   height: 100vh;
+  background-color: #060738;
 }
 
 #login-form {

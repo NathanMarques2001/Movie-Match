@@ -59,6 +59,11 @@ class Film
         return $this->id;
     }
 
+    public function getStreamings(): array
+    {
+        return $this->streamings;
+    }
+
     public function getYear(): string
     {
         return substr($this->date, 0, 4);

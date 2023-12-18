@@ -1,6 +1,6 @@
 <?php require_once __DIR__ . "/../../templates/layout/header.html"; ?>
 
-<body class="bg-danger" id="login-container">
+<body id="login-container">
   <form action="" method="POST" id="login-form" class="bg-light">
     <div class="mb-3" id="login-div-logo-title">
       <img src="http://moviematch.com/assets/logo.png" alt="Logo">

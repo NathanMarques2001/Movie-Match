@@ -29,14 +29,33 @@
 #filmDetail-content {
   display: flex;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
 }
 
-#filmDetail-img {
-  height: 80%;
+#filmDetail-image-container {
+  height: 85%;
   width: auto;
   padding: 2% 3%;
+}
+
+#filmDetail-img {
+  border-radius: 10px 10px 0 0;
+}
+
+.filmDetail-logo-streaming {
+  width: 15%;
+  border-radius: 5px;
+}
+
+.filmDetail-container-streamings {
+  padding: 2% 0;
+  background-color: #060738;
+  text-wrap: wrap;
+}
+
+.filmDetail-container-streamings:nth-last-child(1) {
+  border-radius: 0 0 10px 10px;
 }
