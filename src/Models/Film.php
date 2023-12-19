@@ -64,6 +64,16 @@ class Film
         return $this->streamings;
     }
 
+    public function getDay(): string
+    {
+        return substr($this->date, 8);
+    }
+
+    public function getMonth(): string
+    {
+        return substr($this->date, 5, 2);
+    }
+
     public function getYear(): string
     {
         return substr($this->date, 0, 4);
@@ -78,17 +88,13 @@ class Film
         return implode(', ', $genreNames);
     }
 
-    public function extractStreamings(): string
-    {
-        $streamingsName = array_map(function ($streaming) {
-            return $streaming->provider_name;
-        }, $this->streamings);
-
-        return implode(', ', $streamingsName);
-    }
-
     public function ratingPercentage(): int
     {
         return round($this->rate * 10);
+    }
+
+    public function formatDate(): string
+    {
+        return $this->getDay() . "/" . $this->getMonth() . "/" . $this->getYear();
     }
 }

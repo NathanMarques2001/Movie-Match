@@ -17,7 +17,7 @@ $movie = new Film(
   $film->genres,
   $film->poster_path,
   $film->vote_average,
-  $providers->results->BR->flatrate,
+  $providers->results->BR->flatrate ?? [],
   $film->backdrop_path,
   $film->tagline,
   $film->id
@@ -34,13 +34,31 @@ $movie = new Film(
           <span><?= $streaming->provider_name ?></span>
         </div>
       <?php endforeach; ?>
+      <?php if (empty($movie->getStreamings())) : ?>
+        <div class="filmDetail-container-streamings">
+          <span><?= "Não disponível em serviços de streaming!" ?></span>
+        </div>
+      <?php endif; ?>
     </div>
-    <div>
-      <h1><?= $movie->getTitle() ?> &lpar;<?= $movie->getYear() ?>&rpar;</h1>
-      <p><?= $movie->extractGenres() ?></p>
-      <p>Avaliação -> <?= $movie->ratingPercentage() ?>%</p>
-      <p><?= $movie->getTagline() ?></p>
-      <p>Sinopse</p>
+    <div id="filmDetail-info-container">
+      <h1><strong><?= $movie->getTitle() ?></strong> <span id="filmDetail-title-year">&lpar;<?= $movie->getYear() ?>&rpar;</span></h1>
+      <p>
+        <span>
+          <strong>Lançamento: </strong>
+          <?= $movie->formatDate() ?>
+        </span>
+        <span>&#45;</span>
+        <span>
+          <strong>Gêneros: </strong>
+          <?= $movie->extractGenres() ?>
+        </span>
+      </p>
+      <p>
+        <strong>Avaliação dos usuários: </strong>
+        <?= $movie->ratingPercentage() ?>%
+      </p>
+      <p id="filmDetail-tagline"><?= $movie->getTagline() ?></p>
+      <h4>Sinopse</h4>
       <p><?= $movie->getOverview() ?></p>
     </div>
   </div>

@@ -1,7 +1,7 @@
 #films-container {
   width: 100%;
   text-align: center;
-  background-color: #2c2c2c;
+  background-color: #062138;
 }
 
 #films-list {
@@ -46,16 +46,34 @@
 }
 
 .filmDetail-logo-streaming {
-  width: 15%;
+  width: 12.5%;
   border-radius: 5px;
 }
 
 .filmDetail-container-streamings {
-  padding: 2% 0;
+  padding: 4% 5%;
   background-color: #060738;
   text-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 5%;
 }
 
-.filmDetail-container-streamings:nth-last-child(1) {
+.filmDetail-container-streamings:last-child {
   border-radius: 0 0 10px 10px;
+}
+
+#filmDetail-info-container {
+  padding: 5% 5% 5% 0;
+  text-align: justify;
+}
+
+#filmDetail-tagline {
+  font-weight: lighter;
+  font-style: italic;
+  opacity: .7;
+}
+
+#filmDetail-title-year {
+  opacity: .8;
 }

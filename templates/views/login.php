@@ -3,7 +3,7 @@
 <body id="login-container">
   <form action="" method="POST" id="login-form" class="bg-light">
     <div class="mb-3" id="login-div-logo-title">
-      <img src="http://moviematch.com/assets/logo.png" alt="Logo">
+      <img src="http://moviematch.com/assets/login-logo.png" alt="Logo">
       <p>
         Movie <br> Match
       </p>
