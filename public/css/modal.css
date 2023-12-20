@@ -1,4 +1,15 @@
-#modalGenre-container{
-  width: 50%;
-  background-color: white;
+#modalGenre-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #060738;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalGenre-form {
+  width: 70%;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
 }
