@@ -9,16 +9,19 @@ class User
     private array $likes;
     private array $dislikes;
 
-    public function __construct(string $name, array $grades, array $likes, array $dislikes)
+    public function __construct(string $name, array $grades)
     {
         $this->name = $name;
         $this->grades = $grades;
-        $this->likes = $likes;
-        $this->dislikes = $dislikes;
     }
 
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getGrades(): array
+    {
+        return $this->grades;
     }
 }

@@ -22,6 +22,10 @@ class Connection
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+    $persistence = file_get_contents(__DIR__ . "/script.sql");
+
+    $connection->exec($persistence);
+
     return $connection;
   }
 }

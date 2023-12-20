@@ -35,6 +35,7 @@ class AuthenticateController
         $_SESSION['id'] = $login['id'];
         $_SESSION['name'] = $login['name'];
         $_SESSION['currentPage'] = 1;
+        $_SESSION['genre_assessment'] ?? $this->auth->checkGenreAssessment($login['id']);
 
         header('Location: /home');
       }

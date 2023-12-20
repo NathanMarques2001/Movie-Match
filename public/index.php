@@ -34,7 +34,9 @@ if (!isset($_SESSION['id'])) {
   if (isset($_POST["Logout"])) {
     $authenticateController->logout();
   }
-  if (strpos($pathInfo, "/movie-detail") !== false) {
+  if ($pathInfo === "/modal") {
+    require_once __DIR__ . "/../templates/views/modal-genres.php";
+  } else if (strpos($pathInfo, "/movie-detail") !== false) {
     require_once __DIR__ . "/../templates/views/movie-detail.php";
   } else {
     if ($httpMethod === "GET") {

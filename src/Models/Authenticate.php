@@ -21,7 +21,7 @@ class Authenticate
       echo 'Nome e senha devem ser preenchidos!';
       return false;
     }
-    
+
     $query = "SELECT * FROM users WHERE email = ? LIMIT 1;";
 
     $stmt = $this->connection->prepare($query);
@@ -87,6 +87,21 @@ class Authenticate
     if ($stmt->execute()) {
       $user = $stmt->fetch();
       if ($user) {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  public function checkGenreAssessment(int $id)
+  {
+    $query = "SELECT * FROM genre_assessment WHERE id_user = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $id);
+    if ($stmt->execute()) {
+      $genres = $stmt->fetchAll();
+      if ($genres) {
         return true;
       }
       return false;
