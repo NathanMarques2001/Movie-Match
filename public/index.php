@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use MovieMatch\Controllers\FormGenresController;
 use MovieMatch\Controllers\LoginController;
 use MovieMatch\Controllers\SignUpController;
 use MovieMatch\Controllers\HomeController;
@@ -37,7 +38,12 @@ if (!isset($_SESSION['id'])) {
     $homeController->logout();
   }
   if ($pathInfo === "/modal") {
-    require_once __DIR__ . "/../templates/views/modal-genres.php";
+    $formGenresController = new FormGenresController();
+    if ($httpMethod === "GET") {
+      $formGenresController->renderFormPage();
+    } else if (isset($_POST["genres-assessments"])) {
+      $formGenresController->createUserGenresAssessments();
+    }
   } else if (strpos($pathInfo, "/movie-detail") !== false) {
     require_once __DIR__ . "/../templates/views/movie-detail.php";
   } else {

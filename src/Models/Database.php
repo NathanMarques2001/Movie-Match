@@ -107,4 +107,31 @@ class Database
       return false;
     }
   }
+
+  public function getGenres()
+  {
+    $query = "SELECT * FROM genres;";
+
+    $stmt = $this->connection->prepare($query);
+
+    if ($stmt->execute()) {
+      return $stmt->fetchAll();
+    }
+    return [];
+  }
+
+  public function createGenresAssessments(int $userId, int $genreID, int $grade)
+  {
+    $query = "INSERT IGNORE INTO genre_assessment (id_user, id_genre, grade) VALUES (?, ?, ?);";
+
+    $stmt2 = $this->connection->prepare($query);
+    $stmt2->bindValue(1, $userId);
+    $stmt2->bindValue(2, $genreID);
+    $stmt2->bindValue(3, $grade);
+
+    if ($stmt2->execute()) {
+      return true;
+    }
+    return false;
+  }
 }
