@@ -9,10 +9,8 @@ class User
     private array $likes;
     private array $dislikes;
 
-    public function __construct(string $name, array $grades)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->grades = $grades;
     }
 
     public function getName(): string

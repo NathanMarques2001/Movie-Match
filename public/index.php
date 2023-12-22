@@ -2,7 +2,8 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use MovieMatch\Controllers\AuthenticateController;
+use MovieMatch\Controllers\LoginController;
+use MovieMatch\Controllers\SignUpController;
 use MovieMatch\Controllers\HomeController;
 
 if (!isset($_SESSION)) {
@@ -14,25 +15,26 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $key = "$httpMethod|$pathInfo";
 
 if (!isset($_SESSION['id'])) {
-  $authenticateController = new AuthenticateController();
+  $loginController = new LoginController();
+  $signUpController = new SignUpController();
   if ($pathInfo !== "/signup") {
     if ($httpMethod === "GET") {
-      $authenticateController->renderLoginPage();
+      $loginController->renderLoginPage();
     } else if (isset($_POST["Login"])) {
-      $authenticateController->processLogin();
+      $loginController->processLogin();
     }
   } else if ($pathInfo === "/signup") {
     if ($httpMethod === "GET") {
-      $authenticateController->renderSignupPage();
+      $signUpController->renderSignupPage();
     } else if (isset($_POST["Signup"])) {
-      $authenticateController->processSignup();
+      $signUpController->processSignup();
     }
   }
 } else {
-  $authenticateController = new AuthenticateController();
+  $loginController = new LoginController();
   $homeController = new HomeController();
   if (isset($_POST["Logout"])) {
-    $authenticateController->logout();
+    $homeController->logout();
   }
   if ($pathInfo === "/modal") {
     require_once __DIR__ . "/../templates/views/modal-genres.php";

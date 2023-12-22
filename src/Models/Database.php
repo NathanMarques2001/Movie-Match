@@ -5,7 +5,7 @@ namespace MovieMatch\Models;
 use MovieMatch\Services\Connection;
 use PDO;
 
-class Authenticate
+class Database
 {
   private PDO $connection;
 

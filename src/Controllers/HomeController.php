@@ -2,15 +2,19 @@
 
 namespace MovieMatch\Controllers;
 
+use MovieMatch\Models\Database;
 use MovieMatch\Models\TMDBService;
 
 class HomeController
 {
+  private Database $auth;
+
   public function __construct()
   {
     if (!isset($_SESSION)) {
       session_start();
     }
+    $this->auth = new Database();
   }
 
   public function renderHomePage(): void
@@ -37,5 +41,11 @@ class HomeController
     $_SESSION['currentPage'] = $newPage;
 
     header("Location: http://moviematch.com/home?page=$newPage");
+  }
+
+  public function logout(): void
+  {
+    $this->auth->logout();
+    header("Location: /");
   }
 }
