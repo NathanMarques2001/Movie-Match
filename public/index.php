@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
+use MovieMatch\Controllers\DatabaseController;
 use MovieMatch\Controllers\FormGenresController;
 use MovieMatch\Controllers\LoginController;
 use MovieMatch\Controllers\SignUpController;
@@ -32,25 +33,28 @@ if (!isset($_SESSION['id'])) {
     }
   }
 } else {
-  $loginController = new LoginController();
-  $homeController = new HomeController();
-  if (isset($_POST["Logout"])) {
-    $homeController->logout();
-  }
-  if ($pathInfo === "/modal") {
+  $databaseController = new DatabaseController();
+  if (!$databaseController->checkUserGenreRating()) {
     $formGenresController = new FormGenresController();
     if ($httpMethod === "GET") {
       $formGenresController->renderFormPage();
     } else if (isset($_POST["genres-assessments"])) {
       $formGenresController->createUserGenresAssessments();
     }
-  } else if (strpos($pathInfo, "/movie-detail") !== false) {
-    require_once __DIR__ . "/../templates/views/movie-detail.php";
   } else {
-    if ($httpMethod === "GET") {
-      $homeController->renderHomePage();
-    } else if (isset($_POST["changeMovies"])) {
-      $homeController->loadOtherMovies();
+    $loginController = new LoginController();
+    $homeController = new HomeController();
+    if (isset($_POST["Logout"])) {
+      $homeController->logout();
+    }
+    if (strpos($pathInfo, "/movie-detail") !== false) {
+      require_once __DIR__ . "/../templates/views/movie-detail.php";
+    } else {
+      if ($httpMethod === "GET") {
+        $homeController->renderHomePage();
+      } else if (isset($_POST["changeMovies"])) {
+        $homeController->loadOtherMovies();
+      }
     }
   }
 }

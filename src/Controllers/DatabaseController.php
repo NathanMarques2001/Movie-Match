@@ -16,7 +16,11 @@ class DatabaseController
     }
   }
 
-  public function genderAssessments()
+  public function checkUserGenreRating()
   {
+    if ($this->auth->checkGenreAssessment($_SESSION["id"])) {
+      return true;
+    }
+    return false;
   }
 }
