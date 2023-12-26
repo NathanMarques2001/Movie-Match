@@ -6,11 +6,11 @@ use MovieMatch\Models\Database;
 
 class DatabaseController
 {
-  private Database $auth;
+  private Database $db;
 
   public function __construct()
   {
-    $this->auth = new Database();
+    $this->db = new Database();
     if (!isset($_SESSION)) {
       session_start();
     }
@@ -18,7 +18,7 @@ class DatabaseController
 
   public function checkUserGenreRating()
   {
-    if ($this->auth->checkGenreAssessment($_SESSION["id"])) {
+    if ($this->db->checkGenreAssessment($_SESSION["id"])) {
       return true;
     }
     return false;

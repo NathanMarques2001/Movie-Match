@@ -7,14 +7,14 @@ use MovieMatch\Models\TMDBService;
 
 class HomeController
 {
-  private Database $auth;
+  private Database $db;
 
   public function __construct()
   {
     if (!isset($_SESSION)) {
       session_start();
     }
-    $this->auth = new Database();
+    $this->db = new Database();
   }
 
   public function renderHomePage(): void
@@ -45,7 +45,15 @@ class HomeController
 
   public function logout(): void
   {
-    $this->auth->logout();
+    $this->db->logout();
     header("Location: /");
+  }
+
+  public function getRecommendedSeries()
+  {
+    if (isset($_SESSION['genre_assessment'])) {
+      $grades = $this->db->checkGenreAssessment($_SESSION['id']);
+      var_dump($grades);
+    }
   }
 }

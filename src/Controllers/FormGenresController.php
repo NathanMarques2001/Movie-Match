@@ -7,11 +7,11 @@ use MovieMatch\Models\TMDBService;
 
 class FormGenresController
 {
-  private Database $auth;
+  private Database $db;
 
   public function __construct()
   {
-    $this->auth = new Database();
+    $this->db = new Database();
     if (!isset($_SESSION)) {
       session_start();
     }
@@ -36,7 +36,7 @@ class FormGenresController
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-      $allGenres = $this->auth->getGenres();
+      $allGenres = $this->db->getGenres();
       if ($allGenres) {
         foreach ($allGenres as $genre) {
           $dbGenres[$genre["name"]] = $genre["id"];
@@ -46,7 +46,7 @@ class FormGenresController
 
     foreach ($genres as $genre) {
       if (isset($_POST[$genre])) {
-        $this->auth->createGenresAssessments($_SESSION["id"], $dbGenres[$genre], $_POST[$genre]);
+        $this->db->createGenresAssessments($_SESSION["id"], $dbGenres[$genre], $_POST[$genre]);
       }
     }
 

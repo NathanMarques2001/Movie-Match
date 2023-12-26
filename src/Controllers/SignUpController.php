@@ -6,11 +6,11 @@ use MovieMatch\Models\Database;
 
 class SignUpController
 {
-  private Database $auth;
+  private Database $db;
 
   public function __construct()
   {
-    $this->auth = new Database();
+    $this->db = new Database();
   }
 
   public function renderSignupPage(): void
@@ -26,8 +26,8 @@ class SignUpController
       $email = $_POST['email'] ?? '';
       $password = $_POST['password'] ?? '';
 
-      if ($this->auth->signup($name, $email, $password)) {
-        $login = $this->auth->login($email, $password);
+      if ($this->db->signup($name, $email, $password)) {
+        $login = $this->db->login($email, $password);
 
         if ($login !== false) {
           if (!isset($_SESSION)) {

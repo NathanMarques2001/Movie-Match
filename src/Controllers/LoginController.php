@@ -6,11 +6,11 @@ use MovieMatch\Models\Database;
 
 class LoginController
 {
-  private Database $auth;
+  private Database $db;
 
   public function __construct()
   {
-    $this->auth = new Database();
+    $this->db = new Database();
   }
 
   public function renderLoginPage(): void
@@ -25,7 +25,7 @@ class LoginController
       $email = $_POST['email'] ?? '';
       $password = $_POST['password'] ?? '';
 
-      $login = $this->auth->login($email, $password);
+      $login = $this->db->login($email, $password);
 
       if ($login !== false) {
         if (!isset($_SESSION)) {
@@ -35,7 +35,7 @@ class LoginController
         $_SESSION['id'] = $login['id'];
         $_SESSION['name'] = $login['name'];
         $_SESSION['currentPage'] = 1;
-        $_SESSION['genre_assessment'] ?? $this->auth->checkGenreAssessment($login['id']);
+        $_SESSION['genre_assessment'] ?? $this->db->checkGenreAssessment($login['id']);
 
         header('Location: /home');
       }
