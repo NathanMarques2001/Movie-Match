@@ -10,7 +10,8 @@ $apiGenres = $tmdb->getGenres()->genres;
 $genres = [];
 
 foreach ($apiGenres as $apiGenre) {
-  $genres[] = $apiGenre->name;
+  $name = $apiGenre->name;
+  $genres[] = str_replace(' ', '-', $name);
 }
 ?>
 
@@ -21,7 +22,7 @@ foreach ($apiGenres as $apiGenre) {
       <div id="modalGenre-form-div">
         <h5><?= translateGenres($genre) ?></h5>
         <div>
-          <?php for ($grade = 0; $grade <= 10; $grade++) : ?>
+          <?php for ($grade = 0; $grade < 11; $grade++) : ?>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="<?= $genre ?>" id="<?= $genre ?><?= $grade ?>" value="<?= $grade ?>" required>
               <label class="form-check-label" for="<?= $genre ?><?= $grade ?>"><?= $grade ?></label>

@@ -17,8 +17,8 @@ function translateGenres($englishGenre)
     "Music" => "Música",
     "Mystery" => "Mistério",
     "Romance" => "Romance",
-    "Science Fiction" => "Ficção Científica",
-    "TV Movie" => "Filme para TV",
+    "Science-Fiction" => "Ficção Científica",
+    "TV-Movie" => "Filme para TV",
     "Thriller" => "Suspense",
     "War" => "Guerra",
     "Western" => "Faroeste"

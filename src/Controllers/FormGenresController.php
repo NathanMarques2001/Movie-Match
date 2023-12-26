@@ -29,7 +29,8 @@ class FormGenresController
     $genres = [];
 
     foreach ($apiGenres as $apiGenre) {
-      $genres[] = $apiGenre->name;
+      $name = $apiGenre->name;
+      $genres[] = str_replace(' ', '-', $name);
     }
 
     $dbGenres = array();
@@ -37,6 +38,7 @@ class FormGenresController
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       $allGenres = $this->db->getGenres();
+
       if ($allGenres) {
         foreach ($allGenres as $genre) {
           $dbGenres[$genre["name"]] = $genre["id"];
