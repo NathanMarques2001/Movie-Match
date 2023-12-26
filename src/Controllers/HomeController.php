@@ -48,12 +48,4 @@ class HomeController
     $this->db->logout();
     header("Location: /");
   }
-
-  public function getRecommendedSeries()
-  {
-    if (isset($_SESSION['genre_assessment'])) {
-      $grades = $this->db->checkGenreAssessment($_SESSION['id']);
-      var_dump($grades);
-    }
-  }
 }

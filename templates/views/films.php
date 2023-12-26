@@ -1,14 +1,19 @@
 <?php
 
 use MovieMatch\Controllers\HomeController;
+use MovieMatch\Models\Database;
 use MovieMatch\Models\Film;
 use MovieMatch\Models\FilmList;
+use MovieMatch\Models\RecommendationsModel;
 use MovieMatch\Models\TMDBService;
+use MovieMatch\Models\User;
 
 $homeController = new HomeController();
 $tmdb = new TMDBService();
+$db = new Database();
 
 $filmsData = $homeController->loadFilms();
+$grades = $db->getGenreAssessment($_SESSION["id"]);
 
 $filmList = new FilmList();
 foreach ($filmsData as $filmData) {
@@ -27,12 +32,20 @@ foreach ($filmsData as $filmData) {
 
   $filmList->add($film);
 }
+$finalGrades = array();
+foreach ($grades as $grade) {
+  $finalGrades[$grade["id_genre"]] = $grade["grade"];
+}
+
+$AI = new RecommendationsModel(new User($_SESSION["name"], $finalGrades, [], []), $filmList->getList());
+
+$list = $AI->makeRecommendationList();
 ?>
 
 <div id="films-container">
   <h1>Recomendações de Filmes</h1>
   <main id="films-list">
-    <?php foreach ($filmList->getList() as $film) : ?>
+    <?php foreach ($list as $film) : ?>
       <div class="card mb-3" style="max-width: 18rem;">
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
         <div class="card-body">

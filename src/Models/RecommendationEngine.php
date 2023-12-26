@@ -2,6 +2,8 @@
 
 namespace MovieMatch\Models;
 
+use MovieMatch\Models\Film;
+
 class RecommendationEngine
 {
   private User $user;
@@ -26,7 +28,7 @@ class RecommendationEngine
     $finalGrade = 0;
 
     foreach ($film->getGenres() as $genre) {
-      $finalGrade += $this->user->getGrade($genre->id);
+      $finalGrade += $this->user->getGrade($genre);
     }
 
     return $finalGrade;
