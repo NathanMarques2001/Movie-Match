@@ -9,9 +9,12 @@ class User
     private array $likes;
     private array $dislikes;
 
-    public function __construct(array $grades)
+    public function __construct(string $name, array $grades, array $likes, array $dislikes)
     {
+        $this->name = $name;
         $this->grades = $grades;
+        $this->likes = $likes;
+        $this->dislikes = $dislikes;
     }
 
     public function getName(): string
@@ -22,5 +25,10 @@ class User
     public function getGrades(): array
     {
         return $this->grades;
+    }
+
+    public function getGrade(int $id): int
+    {
+        return $this->grades[$id];
     }
 }

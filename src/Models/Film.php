@@ -79,6 +79,11 @@ class Film
         return substr($this->date, 0, 4);
     }
 
+    public function getGenres(): array
+    {
+        return $this->genres;
+    }
+
     public function extractGenres(): string
     {
         $genreNames = array_map(function ($genre) {

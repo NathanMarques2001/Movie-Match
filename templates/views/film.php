@@ -22,6 +22,7 @@ $movie = new Film(
   $film->tagline,
   $film->id
 );
+
 ?>
 
 <div id="filmDetail-container" style="background-image: url('<?= $tmdb->getBackground($movie->getBackgroundPath()); ?>');">

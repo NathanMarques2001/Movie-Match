@@ -4,7 +4,7 @@ namespace MovieMatch\Models;
 
 use Phpml\Tokenization\WhitespaceTokenizer;
 
-class NLP
+class NLPProcessor
 {
   private array $connectives;
   private WhitespaceTokenizer $tokenizer;

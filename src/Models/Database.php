@@ -134,4 +134,19 @@ class Database
     }
     return false;
   }
+
+  public function getGenreAssessment(int $userId)
+  {
+    $query = "SELECT * FROM genre_assessment WHERE id_user = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $userId);
+    if ($stmt->execute()) {
+      $genres = $stmt->fetchAll();
+      if ($genres) {
+        return $genres;
+      }
+      return [];
+    }
+  }
 }
