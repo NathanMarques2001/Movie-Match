@@ -35,7 +35,8 @@ $list = $AI->makeRecommendationList();
 <div id="films-container">
   <h1>Recomendações de Filmes</h1>
   <main id="films-list">
-    <?php foreach ($list as $film) : ?>
+    <?php for ($i = 0; $i < 20; $i++) : ?>
+      <?php $film = $list[$i]; ?>
       <div class="card mb-3" style="max-width: 18rem;">
         <h3><?= $film->getUserGrade(); ?></h3>
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
@@ -45,7 +46,8 @@ $list = $AI->makeRecommendationList();
           <a href="http://moviematch.com/movie-detail/<?= $film->getID() ?>" class="btn btn-primary">Mais Detalhes</a>
         </div>
       </div>
-    <?php endforeach; ?>
+
+    <?php endfor; ?>
   </main>
   <form action="http://moviematch.com/home" method="POST">
     <button type="submit" class="btn btn-primary btn-lg mb-3" name="changeMovies">Novas recomendações</button>
