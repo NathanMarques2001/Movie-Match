@@ -29,7 +29,7 @@ class HomeController
 
     $result = [];
 
-    for ($i = $currentPage; $i < $currentPage + 5; $i++) {
+    for ($i = $currentPage; $i < $currentPage + 20; $i++) {
       $result[] = $tmdb->getTopRated($i);
     }
 
@@ -40,7 +40,7 @@ class HomeController
   {
     $currentPage = $_SESSION['currentPage'] ?? 1;
 
-    $newPage = $currentPage + 5;
+    $newPage = $currentPage + 20;
 
     $_SESSION['currentPage'] = $newPage;
 

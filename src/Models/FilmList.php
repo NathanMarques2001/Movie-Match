@@ -38,8 +38,9 @@ class FilmList
         "",
         $filmData->id
       );
-
-      $this->add($film);
+      if ($film->getOverview() != null) {
+        $this->add($film);
+      }
     }
   }
 }
