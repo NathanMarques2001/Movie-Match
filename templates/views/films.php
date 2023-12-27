@@ -12,7 +12,11 @@ $homeController = new HomeController();
 $tmdb = new TMDBService();
 $db = new Database();
 
-$filmsData = $homeController->loadFilms();
+$allFilms = $homeController->loadFilms();
+$filmsData = [];
+foreach ($allFilms as $films) {
+  $filmsData = array_merge($filmsData, $films->results);
+}
 $grades = $db->getGenreAssessment($_SESSION["id"]);
 
 $filmList = new FilmList();
@@ -33,7 +37,7 @@ $list = $AI->makeRecommendationList();
   <main id="films-list">
     <?php foreach ($list as $film) : ?>
       <div class="card mb-3" style="max-width: 18rem;">
-      <h3><?= $film->getUserGrade(); ?></h3>
+        <h3><?= $film->getUserGrade(); ?></h3>
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->getTitle() ?></h5>

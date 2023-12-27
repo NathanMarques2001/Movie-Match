@@ -27,16 +27,20 @@ class HomeController
     $tmdb = new TMDBService();
     $currentPage = $_GET['page'] ?? 1;
 
-    $result = $tmdb->getTopRated($currentPage);
+    $result = [];
 
-    return $result->results;
+    for ($i = $currentPage; $i < $currentPage + 5; $i++) {
+      $result[] = $tmdb->getTopRated($i);
+    }
+
+    return $result;
   }
 
   public function loadOtherMovies(): void
   {
     $currentPage = $_SESSION['currentPage'] ?? 1;
 
-    $newPage = $currentPage + 1;
+    $newPage = $currentPage + 5;
 
     $_SESSION['currentPage'] = $newPage;
 
