@@ -16,22 +16,8 @@ $filmsData = $homeController->loadFilms();
 $grades = $db->getGenreAssessment($_SESSION["id"]);
 
 $filmList = new FilmList();
-foreach ($filmsData as $filmData) {
-  $film = new Film(
-    $filmData->title,
-    $filmData->overview,
-    $filmData->release_date,
-    $filmData->genre_ids,
-    $filmData->backdrop_path,
-    $filmData->vote_average,
-    [],
-    $filmData->poster_path,
-    "",
-    $filmData->id
-  );
+$filmList->addAll($filmsData);
 
-  $filmList->add($film);
-}
 $finalGrades = array();
 foreach ($grades as $grade) {
   $finalGrades[$grade["id_genre"]] = $grade["grade"];
@@ -47,6 +33,7 @@ $list = $AI->makeRecommendationList();
   <main id="films-list">
     <?php foreach ($list as $film) : ?>
       <div class="card mb-3" style="max-width: 18rem;">
+      <h3><?= $film->getUserGrade(); ?></h3>
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->getTitle() ?></h5>

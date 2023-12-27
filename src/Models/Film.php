@@ -14,6 +14,7 @@ class Film
     private string $backgroundPath;
     private string $tagline;
     private int $id;
+    private float $userGrade;
 
     public function __construct(string $title, string $overview, string $date, array $genres, string $imagePath, float $rate, array $streamings, string $backgroundPath, string $tagline, int $id)
     {
@@ -101,5 +102,20 @@ class Film
     public function formatDate(): string
     {
         return $this->getDay() . "/" . $this->getMonth() . "/" . $this->getYear();
+    }
+
+    public function getUserGrade(): float
+    {
+        return $this->userGrade;
+    }
+
+    public function setUserGrade(float $userGrade): void
+    {
+        $this->userGrade = $userGrade;
+    }
+
+    public function getGradeWithPercentage(int $genres, int $grade): float
+    {
+        return ($grade * 100) / ($genres * 10);
     }
 }

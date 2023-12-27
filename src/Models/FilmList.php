@@ -22,4 +22,24 @@ class FilmList
   {
     $this->list[] = $value;
   }
+
+  public function addAll(array $films): void
+  {
+    foreach ($films as $filmData) {
+      $film = new Film(
+        $filmData->title,
+        $filmData->overview,
+        $filmData->release_date,
+        $filmData->genre_ids,
+        $filmData->backdrop_path,
+        $filmData->vote_average,
+        [],
+        $filmData->poster_path,
+        "",
+        $filmData->id
+      );
+
+      $this->add($film);
+    }
+  }
 }

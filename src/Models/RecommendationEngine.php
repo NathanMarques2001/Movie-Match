@@ -17,8 +17,11 @@ class RecommendationEngine
   public function gradeProcessor(Film $film)
   {
     $finalGrade = $this->calculateFinalGrade($film);
+    $genresQuantity = count($film->getGenres());
+    $percentageGrade = $film->getGradeWithPercentage($genresQuantity, $finalGrade);
+    $film->setUserGrade($percentageGrade);
 
-    if ($finalGrade >= self::THRESHOLD * count($film->getGenres())) {
+    if ($finalGrade >= self::THRESHOLD * $genresQuantity) {
       return $film;
     }
   }

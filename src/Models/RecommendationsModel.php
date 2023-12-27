@@ -28,8 +28,19 @@ class RecommendationsModel
           $listRecommendation[] = $tempFilm;
         }
       }
-      return $listRecommendation;
+      return $this->sortFilmsByUserGrade($listRecommendation);
     }
     return [];
+  }
+
+  public function sortFilmsByUserGrade(array $list): array
+  {
+    $compareByUserGrade = function (Film $film1, Film $film2) {
+      return $film2->getUserGrade() - $film1->getUserGrade();
+    };
+
+    usort($list, $compareByUserGrade);
+
+    return $list;
   }
 }
