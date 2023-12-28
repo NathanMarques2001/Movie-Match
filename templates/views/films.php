@@ -34,22 +34,32 @@ $list = $AI->makeRecommendationList();
 
 <div id="films-container">
   <h1>Recomendações de Filmes</h1>
-  <main id="films-list">
-    <?php for ($i = 0; $i < 20; $i++) : ?>
-      <?php $film = $list[$i]; ?>
-      <div class="card mb-3" style="max-width: 18rem;">
+  <main id="films-slider">
+    <?php foreach ($list as $film) : ?>
+      <div class="card">
         <h3><?= $film->getUserGrade(); ?></h3>
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->getTitle() ?></h5>
-          <p class="card-text" style="max-width: 18rem; height: 320px; overflow: auto;"><?= $film->getOverview() ?></p>
+          <p class="card-text"><?= $film->getOverview() ?></p>
           <a href="http://moviematch.com/movie-detail/<?= $film->getID() ?>" class="btn btn-primary">Mais Detalhes</a>
         </div>
       </div>
-
-    <?php endfor; ?>
+    <?php endforeach; ?>
   </main>
   <form action="http://moviematch.com/home" method="POST">
     <button type="submit" class="btn btn-primary btn-lg mb-3" name="changeMovies">Novas recomendações</button>
   </form>
 </div>
+
+<script>
+  $(document).ready(function () {
+    $('#films-slider').slick({
+      infinite: true,
+      slidesToShow: 3, // Quantidade de slides a serem exibidos
+      slidesToScroll: 1, // Quantidade de slides a serem percorridos ao clicar no botão de navegação
+      prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+      nextArrow: '<button type="button" class="slick-next">Next</button>',
+    });
+  });
+</script>
