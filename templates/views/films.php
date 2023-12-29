@@ -36,12 +36,11 @@ $list = $AI->makeRecommendationList();
   <h1>Recomendações de Filmes</h1>
   <main id="films-slider">
     <?php foreach ($list as $film) : ?>
-      <div class="card">
-        <h3><?= $film->getUserGrade(); ?></h3>
+      <div class="card" style="margin-right: 1rem;">
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->getTitle() ?></h5>
-          <p class="card-text"><?= $film->getOverview() ?></p>
+          <p class="card-text" style="height: 320px; overflow: auto;"><?= $film->getOverview() ?></p>
           <a href="http://moviematch.com/movie-detail/<?= $film->getID() ?>" class="btn btn-primary">Mais Detalhes</a>
         </div>
       </div>
@@ -53,13 +52,13 @@ $list = $AI->makeRecommendationList();
 </div>
 
 <script>
-  $(document).ready(function () {
+  $(document).ready(function() {
     $('#films-slider').slick({
       infinite: true,
-      slidesToShow: 3, // Quantidade de slides a serem exibidos
-      slidesToScroll: 1, // Quantidade de slides a serem percorridos ao clicar no botão de navegação
-      prevArrow: '<button type="button" class="slick-prev">Previous</button>',
-      nextArrow: '<button type="button" class="slick-next">Next</button>',
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      prevArrow: '<button type="button" class="slick-prev btn-slider"><img src="http://moviematch.com/assets/arrow-left.png" alt=""></button>',
+      nextArrow: '<button type="button" class="slick-next btn-slider"><img src="http://moviematch.com/assets/arrow-right.png" alt=""></button>',
     });
   });
 </script>
