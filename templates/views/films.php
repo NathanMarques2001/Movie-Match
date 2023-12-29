@@ -2,7 +2,6 @@
 
 use MovieMatch\Controllers\HomeController;
 use MovieMatch\Models\Database;
-use MovieMatch\Models\Film;
 use MovieMatch\Models\FilmList;
 use MovieMatch\Models\RecommendationsModel;
 use MovieMatch\Models\TMDBService;
