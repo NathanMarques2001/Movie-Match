@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `movie_match`.genre_assessment (
 CREATE TABLE IF NOT EXISTS `movie_match`.rated_films ( 
     id_user INT NOT NULL,
     id_film INT NOT NULL,
-    overview VARCHAR(255) NOT NULL,
+    overview VARCHAR(2055) NOT NULL,
     rated INT NOT NULL,
     CONSTRAINT fk_rated_films_users FOREIGN KEY (id_user) REFERENCES `movie_match`.users (id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) engine=InnoDB;

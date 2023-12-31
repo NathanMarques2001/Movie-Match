@@ -2,6 +2,8 @@
 
 namespace MovieMatch\Models;
 
+require_once __DIR__ . "/../../vendor/autoload.php";
+
 use MovieMatch\Services\Connection;
 use PDO;
 
@@ -145,6 +147,21 @@ class Database
       $genres = $stmt->fetchAll();
       if ($genres) {
         return $genres;
+      }
+      return [];
+    }
+  }
+
+  public function getRatedFilms(int $userId)
+  {
+    $query = "SELECT * FROM rated_films WHERE id_user = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $userId);
+    if ($stmt->execute()) {
+      $films = $stmt->fetchAll();
+      if ($films) {
+        return $films;
       }
       return [];
     }

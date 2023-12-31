@@ -26,7 +26,9 @@ foreach ($grades as $grade) {
   $finalGrades[$grade["id_genre"]] = $grade["grade"];
 }
 
-$AI = new RecommendationsModel(new User($_SESSION["name"], $finalGrades, [], []), $filmList->getList());
+$rateds = $db->getRatedFilms($_SESSION["id"]);
+
+$AI = new RecommendationsModel(new User($_SESSION["name"], $finalGrades, $rateds), $filmList->getList());
 
 $list = $AI->makeRecommendationList();
 ?>
@@ -36,6 +38,7 @@ $list = $AI->makeRecommendationList();
   <main id="films-slider">
     <?php foreach ($list as $film) : ?>
       <div class="card" style="margin-right: 1rem;">
+      <h3><?= $film->getUserGrade() ?></h3>
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->getTitle() ?></h5>

@@ -2,6 +2,8 @@
 
 namespace MovieMatch\Models;
 
+require_once __DIR__ . "/../../vendor/autoload.php";
+
 use Phpml\Tokenization\WhitespaceTokenizer;
 
 class NLPProcessor
@@ -16,8 +18,17 @@ class NLPProcessor
     ];
   }
 
+  public function calculateSimilarity(string $filmDbOverview, Film $currentFilm)
+  {
+    $freq1 = $this->calculateFrequency($filmDbOverview);
+    $freq2 = $this->calculateFrequency($currentFilm->getOverview());
+    $similarity = $this->cosineSimilarity($freq1, $freq2);
+
+    return $similarity * 100;
+  }
+
   // Extrai cada palavra e conta sua frequência em cada texto
-  public function calculateFrequency(string $text)
+  private function calculateFrequency(string $text)
   {
     $tokens = $this->tokenizer->tokenize(strtolower($text));
     // Remove conectivos
@@ -27,7 +38,7 @@ class NLPProcessor
   }
 
   // Função para calcular a similaridade dos cossenos
-  public function cosineSimilarity($frequency1, $frequency2)
+  private function cosineSimilarity($frequency1, $frequency2)
   {
     // Calcula o produto escalar das palavras em comum
     $product = 0;
