@@ -166,4 +166,22 @@ class Database
       return [];
     }
   }
+
+  public function rateFilm(int $userId, int $filmId, string $overview, int $rated)
+  {
+    $query = "INSERT INTO rated_films (id_user, id_film, overview, rated) VALUES (?,?,?,?)";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $userId);
+    $stmt->bindValue(2, $filmId);
+    $stmt->bindValue(3, $overview);
+    $stmt->bindValue(4, $rated);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    echo 'Erro ao avaliar filme!';
+    return false;
+  }
 }

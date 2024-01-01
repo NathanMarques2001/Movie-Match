@@ -1,5 +1,6 @@
 <?php
 
+use MovieMatch\Models\Database;
 use MovieMatch\Models\Film;
 use MovieMatch\Models\TMDBService;
 
@@ -22,6 +23,16 @@ $movie = new Film(
   $film->tagline,
   $film->id
 );
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  if (isset($_POST["liked"]) || isset($_POST["notLiked"])) {
+    $db = new Database();
+    $likedOrNot = isset($_POST["liked"]) ? 1 : 0;
+    $db->rateFilm($_SESSION["id"], $_POST["film_id"], $_POST["film_overview"], $likedOrNot);
+    header('Location: /home');
+    exit;
+  }
+}
 
 ?>
 
@@ -61,6 +72,12 @@ $movie = new Film(
       <p id="filmDetail-tagline"><?= $movie->getTagline() ?></p>
       <h4>Sinopse</h4>
       <p><?= $movie->getOverview() ?></p>
+      <form method="POST" id="filmDetail-btn-container">
+        <input type="hidden" name="film_id" value="<?= $movie->getId() ?>">
+        <input type="hidden" name="film_overview" value="<?= htmlspecialchars($movie->getOverview()) ?>">
+        <button type="submit" name="liked" class="filmDetail-btn" id="filmDetail-btnLiked">Gostei</button>
+        <button type="submit" name="notLiked" class="filmDetail-btn" id="filmDetail-btnNotLiked">Não Gostei</button>
+      </form>
     </div>
   </div>
 </div>
