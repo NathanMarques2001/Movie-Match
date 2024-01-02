@@ -1,35 +1,23 @@
 <?php
 
 use MovieMatch\Controllers\HomeController;
-use MovieMatch\Models\Database;
 use MovieMatch\Models\FilmList;
 use MovieMatch\Models\RecommendationsModel;
 use MovieMatch\Models\TMDBService;
-use MovieMatch\Models\User;
 
 $homeController = new HomeController();
 $tmdb = new TMDBService();
-$db = new Database();
 
 $allFilms = $homeController->loadFilms();
 $filmsData = [];
 foreach ($allFilms as $films) {
   $filmsData = array_merge($filmsData, $films->results);
 }
-$grades = $db->getGenreAssessment($_SESSION["id"]);
 
 $filmList = new FilmList();
 $filmList->addAll($filmsData);
 
-$finalGrades = array();
-foreach ($grades as $grade) {
-  $finalGrades[$grade["id_genre"]] = $grade["grade"];
-}
-
-$rateds = $db->getRatedFilms($_SESSION["id"]);
-
-$AI = new RecommendationsModel(new User($_SESSION["name"], $finalGrades, $rateds), $filmList->getList());
-
+$AI = new RecommendationsModel($filmList->getList());
 $list = $AI->makeRecommendationList();
 ?>
 
@@ -38,7 +26,7 @@ $list = $AI->makeRecommendationList();
   <main id="films-slider">
     <?php foreach ($list as $film) : ?>
       <div class="card" style="margin-right: 1rem;">
-      <h3><?= $film->getUserGrade() ?></h3>
+        <h3><?= $film->getUserGrade() ?></h3>
         <img src="<?= $tmdb->getImage($film->getImagePath()); ?>" class="card-img-top" alt="Pôster - <?= $film->getTitle() ?>">
         <div class="card-body">
           <h5 class="card-title"><?= $film->getTitle() ?></h5>

@@ -2,8 +2,6 @@
 
 namespace MovieMatch\Models;
 
-use MovieMatch\Models\Film;
-
 class FilmList
 {
   private array $list;

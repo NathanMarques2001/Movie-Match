@@ -2,22 +2,21 @@
 
 namespace MovieMatch\Models;
 
-use MovieMatch\Models\NLPProcessor;
-use MovieMatch\Models\User;
-
 class RecommendationsModel
 {
   private User $user;
   private NLPProcessor $NLPProcessor;
   private RecommendationEngine $recommendationEngine;
+  private Database $db;
   private array $filmList;
 
-  public function __construct(User $user, array $filmList)
+  public function __construct(array $filmList)
   {
-    $this->user = $user;
-    $this->NLPProcessor = new NLPProcessor();
-    $this->recommendationEngine = new RecommendationEngine($user);
     $this->filmList = $filmList;
+    $this->db = new Database();
+    $this->user = new User($_SESSION["name"], $this->getUserGrades(), $this->getRatedFilms());
+    $this->NLPProcessor = new NLPProcessor();
+    $this->recommendationEngine = new RecommendationEngine($this->user);
   }
 
   public function makeRecommendationList()
@@ -85,5 +84,22 @@ class RecommendationsModel
     }
 
     return $assocArray;
+  }
+
+  private function getUserGrades()
+  {
+    $grades = $this->db->getGenreAssessment($_SESSION["id"]);
+
+    $finalGrades = array();
+    foreach ($grades as $grade) {
+      $finalGrades[$grade["id_genre"]] = $grade["grade"];
+    }
+
+    return $finalGrades;
+  }
+
+  private function getRatedFilms()
+  {
+    return $this->db->getRatedFilms($_SESSION["id"]);
   }
 }

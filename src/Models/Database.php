@@ -2,8 +2,6 @@
 
 namespace MovieMatch\Models;
 
-require_once __DIR__ . "/../../vendor/autoload.php";
-
 use MovieMatch\Services\Connection;
 use PDO;
 
@@ -35,13 +33,12 @@ class Database
         if (password_verify($password, $user['password'])) {
           return $user;
         } else {
-          echo "Email ou senha incorretos!";
-          return false;
+          throw new \Exception("Email ou senha incorretos!");
         }
       }
-      echo "Usuário não encontrado!";
-      return false;
+      throw new \Exception("Usuário não encontrado!");
     }
+    throw new \Exception("Erro na execução da consulta.");
   }
 
   public function logout()
@@ -55,13 +52,11 @@ class Database
   public function signup(string $name, string $email, string $password)
   {
     if (empty($name) || empty($email) || empty(trim($password))) {
-      echo 'Nome, email e senha devem ser preenchidos!';
-      return false;
+      throw new \Exception("Nome, email e senha devem ser preenchidos!");
     }
 
     if ($this->checkEmail($email)) {
-      echo "Email já cadastrado!";
-      return false;
+      throw new \Exception("Email já cadastrado!");
     }
 
     $query = "INSERT INTO users (name, email, password) VALUES (?,?,?)";
@@ -74,9 +69,7 @@ class Database
     if ($stmt->execute()) {
       return true;
     }
-
-    echo 'Erro ao cadastrar usuário!';
-    return false;
+    throw new \Exception("Erro na criação do registro.");
   }
 
   private function checkEmail(string $email)
@@ -93,6 +86,7 @@ class Database
       }
       return false;
     }
+    throw new \Exception("Erro na execução da consulta.");
   }
 
   public function checkGenreAssessment(int $userId)
@@ -108,6 +102,7 @@ class Database
       }
       return false;
     }
+    throw new \Exception("Erro na execução da consulta.");
   }
 
   public function getGenres()
@@ -119,7 +114,7 @@ class Database
     if ($stmt->execute()) {
       return $stmt->fetchAll();
     }
-    return [];
+    throw new \Exception("Erro na execução da consulta.");
   }
 
   public function createGenresAssessments(int $userId, int $genreID, int $grade)
@@ -134,7 +129,7 @@ class Database
     if ($stmt2->execute()) {
       return true;
     }
-    return false;
+    throw new \Exception("Erro na criação do registro.");
   }
 
   public function getGenreAssessment(int $userId)
@@ -150,6 +145,7 @@ class Database
       }
       return [];
     }
+    throw new \Exception("Erro na execução da consulta.");
   }
 
   public function getRatedFilms(int $userId)
@@ -165,6 +161,7 @@ class Database
       }
       return [];
     }
+    throw new \Exception("Erro na execução da consulta.");
   }
 
   public function rateFilm(int $userId, int $filmId, string $overview, int $rated)
@@ -180,8 +177,6 @@ class Database
     if ($stmt->execute()) {
       return true;
     }
-
-    echo 'Erro ao avaliar filme!';
-    return false;
+    throw new \Exception("Erro ao avaliar filme!");
   }
 }

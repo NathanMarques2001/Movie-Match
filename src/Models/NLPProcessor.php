@@ -2,8 +2,6 @@
 
 namespace MovieMatch\Models;
 
-require_once __DIR__ . "/../../vendor/autoload.php";
-
 use Phpml\Tokenization\WhitespaceTokenizer;
 
 class NLPProcessor
