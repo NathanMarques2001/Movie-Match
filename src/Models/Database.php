@@ -2,7 +2,7 @@
 
 namespace MovieMatch\Models;
 
-use MovieMatch\Services\Connection;
+use Dotenv\Dotenv;
 use PDO;
 
 class Database
@@ -11,8 +11,34 @@ class Database
 
   public function __construct()
   {
-    $connection = new Connection();
-    $this->connection = $connection->createConnection();
+    $this->connection = $this->createConnection();
+  }
+
+  public function getConnection()
+  {
+    return $this->connection;
+  }
+
+  private static function createConnection()
+  {
+    $path = dirname(__DIR__, 2);
+    $dotenv = Dotenv::createImmutable($path);
+    $dotenv->load();
+
+    $connection = new PDO(
+      'mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'],
+      $_ENV['DB_USER'],
+      $_ENV['DB_PASS']
+    );
+
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+    $persistence = file_get_contents(__DIR__ . "/../../utils/script.sql");
+
+    $connection->exec($persistence);
+
+    return $connection;
   }
 
   public function login(string $email, string $password)
@@ -162,21 +188,5 @@ class Database
       return [];
     }
     throw new \Exception("Erro na execução da consulta.");
-  }
-
-  public function rateFilm(int $userId, int $filmId, string $overview, int $rated)
-  {
-    $query = "INSERT INTO rated_films (id_user, id_film, overview, rated) VALUES (?,?,?,?)";
-
-    $stmt = $this->connection->prepare($query);
-    $stmt->bindValue(1, $userId);
-    $stmt->bindValue(2, $filmId);
-    $stmt->bindValue(3, $overview);
-    $stmt->bindValue(4, $rated);
-
-    if ($stmt->execute()) {
-      return true;
-    }
-    throw new \Exception("Erro ao avaliar filme!");
   }
 }

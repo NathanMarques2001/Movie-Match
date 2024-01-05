@@ -2,6 +2,7 @@
 
 use MovieMatch\Models\Database;
 use MovieMatch\Models\Film;
+use MovieMatch\Models\FilmDatabase;
 use MovieMatch\Models\TMDBService;
 
 $parts = explode('/', $_SERVER['REQUEST_URI']);
@@ -26,9 +27,9 @@ $movie = new Film(
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   if (isset($_POST["liked"]) || isset($_POST["notLiked"])) {
-    $db = new Database();
+    $filmdb = new FilmDatabase();
     $likedOrNot = isset($_POST["liked"]) ? 1 : 0;
-    $db->rateFilm($_SESSION["id"], $_POST["film_id"], $_POST["film_overview"], $likedOrNot);
+    $filmdb->rateFilm($_SESSION["id"], $_POST["film_id"], $_POST["film_overview"], $likedOrNot);
     header('Location: /home');
     exit;
   }
