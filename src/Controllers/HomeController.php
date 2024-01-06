@@ -7,7 +7,7 @@ use MovieMatch\Models\FilmList;
 use MovieMatch\Models\RecommendationsModel;
 use MovieMatch\Models\TMDBService;
 
-class HomeController
+class HomeController extends Controller
 {
   private Database $db;
 
@@ -18,11 +18,6 @@ class HomeController
     }
     $this->db = new Database();
   }
-
-  protected function view($view, $data = []) {
-    extract($data);
-    include __DIR__ . "/../../templates/views/{$view}.php";
-}
 
   public function index()
   {
