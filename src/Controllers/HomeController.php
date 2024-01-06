@@ -3,6 +3,8 @@
 namespace MovieMatch\Controllers;
 
 use MovieMatch\Models\Database;
+use MovieMatch\Models\FilmList;
+use MovieMatch\Models\RecommendationsModel;
 use MovieMatch\Models\TMDBService;
 
 class HomeController
@@ -15,6 +17,31 @@ class HomeController
       session_start();
     }
     $this->db = new Database();
+  }
+
+  protected function view($view, $data = []) {
+    extract($data);
+    include __DIR__ . "/../../templates/views/{$view}.php";
+}
+
+  public function index()
+  {
+    $homeController = new HomeController();
+    $tmdb = new TMDBService();
+
+    $allFilms = $homeController->loadFilms();
+    $filmsData = [];
+    foreach ($allFilms as $films) {
+      $filmsData = array_merge($filmsData, $films->results);
+    }
+
+    $filmList = new FilmList();
+    $filmList->addAll($filmsData);
+
+    $AI = new RecommendationsModel($filmList->getList());
+    $list = $AI->makeRecommendationList();
+
+    return $this->view("films", ['list' => $list, 'tmdb' => $tmdb]);
   }
 
   public function renderHomePage(): void

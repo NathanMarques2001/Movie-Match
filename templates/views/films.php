@@ -1,26 +1,3 @@
-<?php
-
-use MovieMatch\Controllers\HomeController;
-use MovieMatch\Models\FilmList;
-use MovieMatch\Models\RecommendationsModel;
-use MovieMatch\Models\TMDBService;
-
-$homeController = new HomeController();
-$tmdb = new TMDBService();
-
-$allFilms = $homeController->loadFilms();
-$filmsData = [];
-foreach ($allFilms as $films) {
-  $filmsData = array_merge($filmsData, $films->results);
-}
-
-$filmList = new FilmList();
-$filmList->addAll($filmsData);
-
-$AI = new RecommendationsModel($filmList->getList());
-$list = $AI->makeRecommendationList();
-?>
-
 <div id="films-container">
   <h1>Recomendações de Filmes</h1>
   <main id="films-slider">
