@@ -15,7 +15,7 @@ class FilmListController extends Controller
     $this->tmdb = $tmdb;
   }
 
-  public function index()
+  public function render()
   {
     $currentPage = $this->getCurrentPage();
     $allFilms = $this->loadFilms($currentPage);

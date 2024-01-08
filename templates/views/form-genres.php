@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../layout/header.html";
+require_once __DIR__ . "/../layout/navbar.php";
 require_once __DIR__ . "/../../utils/translateGenres.php";
 
 use MovieMatch\Models\TMDBService;

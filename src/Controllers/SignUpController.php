@@ -2,44 +2,34 @@
 
 namespace MovieMatch\Controllers;
 
-use MovieMatch\Models\Database;
+use MovieMatch\Models\UserDatabase;
 
-class SignUpController
+class SignUpController extends Controller
 {
-  private Database $db;
+  private UserDatabase $userDatabase;
 
-  public function __construct()
+  public function __construct(UserDatabase $userDatabase)
   {
-    $this->db = new Database();
+    $this->userDatabase = $userDatabase;
   }
 
-  public function renderSignupPage(): void
+  public function render()
   {
-    require_once __DIR__ . '/../../templates/views/signup.php';
+    return $this->view("signup");
   }
 
-  public function processSignup(): void
+  public function request()
   {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      // Obtenha os dados do formulário
+    try {
       $name = $_POST['name'] ?? '';
       $email = $_POST['email'] ?? '';
       $password = $_POST['password'] ?? '';
 
-      if ($this->db->signup($name, $email, $password)) {
-        $login = $this->db->login($email, $password);
-
-        if ($login !== false) {
-          if (!isset($_SESSION)) {
-            session_start();
-          }
-
-          $_SESSION['id'] = $login['id'];
-          $_SESSION['name'] = $login['name'];
-
-          header('Location: /home');
-        }
+      if ($this->userDatabase->registerUser($name, $email, $password)) {
+        header('Location: /');
       }
+    } catch (\Exception $e) {
+      echo $e->getMessage();
     }
   }
 }

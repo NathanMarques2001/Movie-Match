@@ -10,5 +10,5 @@ abstract class Controller
     include __DIR__ . "/../../templates/views/{$view}.php";
   }
 
-  abstract public function index();
+  abstract public function render();
 }

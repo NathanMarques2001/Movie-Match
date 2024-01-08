@@ -4,22 +4,21 @@ namespace MovieMatch\Models;
 
 use PDO;
 
-class UserDatase
+class UserDatabase
 {
   private Database $database;
   private PDO $connection;
 
-  public function __construct()
+  public function __construct(Database $database)
   {
-    $this->database = new Database();
+    $this->database = $database;
     $this->connection = $this->database->getConnection();
   }
 
   public function findUser(string $email, string $password)
   {
     if (empty($email) || empty(trim($password))) {
-      echo 'Nome e senha devem ser preenchidos!';
-      return false;
+      throw new \Exception("Email e senha devem ser preenchidos!");
     }
 
     $query = "SELECT * FROM users WHERE email = ? LIMIT 1;";

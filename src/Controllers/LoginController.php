@@ -2,43 +2,53 @@
 
 namespace MovieMatch\Controllers;
 
-use MovieMatch\Models\Database;
+use MovieMatch\Models\GenreDatabase;
+use MovieMatch\Models\Session;
+use MovieMatch\Models\UserDatabase;
 
-class LoginController
+class LoginController extends Controller
 {
-  private Database $db;
+  private UserDatabase $userDatabase;
+  private GenreDatabase $genreDatabase;
+  private Session $session;
 
-  public function __construct()
+  public function __construct(UserDatabase $userDatabase, GenreDatabase $genreDatabase, Session $session)
   {
-    $this->db = new Database();
+    $this->userDatabase = $userDatabase;
+    $this->genreDatabase = $genreDatabase;
+    $this->session = $session;
   }
 
-  public function renderLoginPage(): void
+  public function render()
   {
-    require_once __DIR__ . '/../../templates/views/login.php';
+    return $this->view("login");
   }
 
-  public function processLogin(): void
+  public function request()
   {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      // Obtenha os dados do formulário
+    try {
       $email = $_POST['email'] ?? '';
       $password = $_POST['password'] ?? '';
 
-      $login = $this->db->login($email, $password);
+      $login = $this->userDatabase->findUser($email, $password);
 
       if ($login !== false) {
-        if (!isset($_SESSION)) {
-          session_start();
+
+        $this->session->start();
+        $this->session->set('id', $login['id']);
+        $this->session->set('name', $login['name']);
+        $this->session->set('currentPage', 1);
+
+        if ($this->session->get('genre_assessment') == null) {
+          $this->session->set('genre_assessment', $this->genreDatabase->checkGenreAssessment($login['id']));
         }
 
-        $_SESSION['id'] = $login['id'];
-        $_SESSION['name'] = $login['name'];
-        $_SESSION['currentPage'] = 1;
-        $_SESSION['genre_assessment'] ?? $this->db->checkGenreAssessment($login['id']);
-
         header('Location: /home');
+        exit();
       }
+    } catch (\Exception $e) {
+      echo $e->getMessage();
     }
+    exit();
   }
 }

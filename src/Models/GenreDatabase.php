@@ -9,9 +9,9 @@ class GenreDatabase
   private Database $database;
   private PDO $connection;
 
-  public function __construct()
+  public function __construct(Database $database)
   {
-    $this->database = new Database();
+    $this->database = $database;
     $this->connection = $this->database->getConnection();
   }
 

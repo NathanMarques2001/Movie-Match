@@ -44,8 +44,7 @@ class Database
   public function login(string $email, string $password)
   {
     if (empty($email) || empty(trim($password))) {
-      echo 'Nome e senha devem ser preenchidos!';
-      return false;
+      throw new \Exception("Email e senha devem ser preenchidos!");
     }
 
     $query = "SELECT * FROM users WHERE email = ? LIMIT 1;";

@@ -19,43 +19,12 @@ class HomeController extends Controller
     $this->db = new Database();
   }
 
-  public function index()
+  public function render()
   {
-    $homeController = new HomeController();
-    $tmdb = new TMDBService();
+    $filmListController = new FilmListController(new TMDBService());
+    $filmList = $filmListController->render();
 
-    $allFilms = $homeController->loadFilms();
-    $filmsData = [];
-    foreach ($allFilms as $films) {
-      $filmsData = array_merge($filmsData, $films->results);
-    }
-
-    $filmList = new FilmList();
-    $filmList->addAll($filmsData);
-
-    $AI = new RecommendationsModel($filmList->getList());
-    $list = $AI->makeRecommendationList();
-
-    return $this->view("films", ['list' => $list, 'tmdb' => $tmdb]);
-  }
-
-  public function renderHomePage(): void
-  {
-    require_once __DIR__ . '/../../templates/views/home.php';
-  }
-
-  public function loadFilms()
-  {
-    $tmdb = new TMDBService();
-    $currentPage = $_GET['page'] ?? 1;
-
-    $result = [];
-
-    for ($i = $currentPage; $i < $currentPage + 10; $i++) {
-      $result[] = $tmdb->getTopRated($i);
-    }
-
-    return $result;
+    return $this->view("home", ["filmList" => $filmList]);
   }
 
   public function loadOtherMovies(): void

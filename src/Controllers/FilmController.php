@@ -17,7 +17,7 @@ class FilmController extends Controller
     $this->filmdb = $filmdb;
   }
 
-  public function index()
+  public function render()
   {
     $filmID = $this->getFilmIDFromURL();
     $film = $this->tmdb->getMovie($filmID);
@@ -39,6 +39,16 @@ class FilmController extends Controller
     return $this->view("Film", ["tmdb" => $this->tmdb, "movie" => $movie]);
   }
 
+  public function request()
+  {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["liked"]) || isset($_POST["notLiked"]))) {
+      $likedOrNot = isset($_POST["liked"]) ? 1 : 0;
+      $this->filmdb->rateFilm($_SESSION["id"], $_POST["film_id"], $_POST["film_overview"], $likedOrNot);
+      header('Location: /home');
+      exit;
+    }
+  }
+
   private function getFilmIDFromURL(): int
   {
     $url = $_SERVER['REQUEST_URI'];
@@ -49,15 +59,5 @@ class FilmController extends Controller
     }
 
     return 0;
-  }
-
-  public function rateFilm()
-  {
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["liked"]) || isset($_POST["notLiked"]))) {
-      $likedOrNot = isset($_POST["liked"]) ? 1 : 0;
-      $this->filmdb->rateFilm($_SESSION["id"], $_POST["film_id"], $_POST["film_overview"], $likedOrNot);
-      header('Location: /home');
-      exit;
-    }
   }
 }
