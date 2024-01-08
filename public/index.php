@@ -2,9 +2,9 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use MovieMatch\Controllers\DatabaseController;
 use MovieMatch\Controllers\FilmController;
 use MovieMatch\Controllers\FormGenresController;
+use MovieMatch\Controllers\GenreDatabaseController;
 use MovieMatch\Controllers\LoginController;
 use MovieMatch\Controllers\SignUpController;
 use MovieMatch\Controllers\HomeController;
@@ -40,8 +40,8 @@ if (!isset($_SESSION['id'])) {
     }
   }
 } else {
-  $databaseController = new DatabaseController();
-  if (!$databaseController->checkUserGenreRating()) {
+  $genreDatabaseController = new GenreDatabaseController(new GenreDatabase(new Database()), new Session());
+  if (!$genreDatabaseController->request()) {
     $formGenresController = new FormGenresController();
     if ($httpMethod === "GET") {
       $formGenresController->renderFormPage();
@@ -50,14 +50,14 @@ if (!isset($_SESSION['id'])) {
     }
   } else {
     $loginController = new LoginController(new UserDatabase(new Database()), new GenreDatabase(new Database()), new Session);
-    $homeController = new HomeController();
+    $homeController = new HomeController(new TMDBService(), new Session());
     if (isset($_POST["Logout"])) {
       $homeController->logout();
     }
     if (strpos($pathInfo, "/movie-detail") !== false) {
-      $filmController = new FilmController(new TMDBService, new FilmDatabase);
+      $filmController = new FilmController(new TMDBService(), new FilmDatabase(new Database()), new Session());
       if ($httpMethod === "GET") {
-        require_once __DIR__ . "/../templates/views/movie-detail.php";
+        $filmController->render();
       } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $filmController->request();
       }
@@ -65,7 +65,7 @@ if (!isset($_SESSION['id'])) {
       if ($httpMethod === "GET") {
         $homeController->render();
       } else if (isset($_POST["changeMovies"])) {
-        $homeController->loadOtherMovies();
+        $homeController->request();
       }
     }
   }

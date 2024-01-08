@@ -4,17 +4,20 @@ namespace MovieMatch\Controllers;
 
 use MovieMatch\Models\Film;
 use MovieMatch\Models\FilmDatabase;
+use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 
 class FilmController extends Controller
 {
   private TMDBService $tmdb;
   private FilmDatabase $filmdb;
+  private Session $session;
 
-  public function __construct(TMDBService $tmdb, FilmDatabase $filmdb)
+  public function __construct(TMDBService $tmdb, FilmDatabase $filmdb, Session $session)
   {
     $this->tmdb = $tmdb;
     $this->filmdb = $filmdb;
+    $this->session = $session;
   }
 
   public function render()
@@ -36,16 +39,20 @@ class FilmController extends Controller
       $film->id
     );
 
-    return $this->view("Film", ["tmdb" => $this->tmdb, "movie" => $movie]);
+    return $this->view("film", ["tmdb" => $this->tmdb, "movie" => $movie]);
   }
 
   public function request()
   {
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && (isset($_POST["liked"]) || isset($_POST["notLiked"]))) {
-      $likedOrNot = isset($_POST["liked"]) ? 1 : 0;
-      $this->filmdb->rateFilm($_SESSION["id"], $_POST["film_id"], $_POST["film_overview"], $likedOrNot);
-      header('Location: /home');
-      exit;
+    if (isset($_POST["liked"]) || isset($_POST["notLiked"])) {
+      try {
+        $likedOrNot = isset($_POST["liked"]) ? 1 : 0;
+        $this->filmdb->rateFilm($this->session->get('id'), $_POST["film_id"], $_POST["film_overview"], $likedOrNot);
+        header('Location: /home');
+        exit();
+      } catch (\Exception $e) {
+        echo $e->getMessage();
+      }
     }
   }
 

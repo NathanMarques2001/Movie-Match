@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "/../../templates/layout/header.html"; ?>
+<?php require_once __DIR__ . "/../layout/header.html"; ?>
 
 <body id="login-container">
   <form action="" method="POST" id="login-form" class="bg-light">
@@ -21,4 +21,4 @@
   </form>
 </body>
 
-<?php require_once __DIR__ . "/../../templates/layout/footer.html"; ?>
+<?php require_once __DIR__ . "/../layout/footer.html"; ?>

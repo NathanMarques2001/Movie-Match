@@ -5,7 +5,7 @@ namespace MovieMatch\Controllers;
 use MovieMatch\Models\Database;
 use MovieMatch\Models\TMDBService;
 
-class FormGenresController
+class FormGenresController extends Controller
 {
   private Database $db;
 
@@ -15,6 +15,10 @@ class FormGenresController
     if (!isset($_SESSION)) {
       session_start();
     }
+  }
+
+  public function render()
+  {
   }
 
   public function renderFormPage(): void

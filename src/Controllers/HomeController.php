@@ -2,45 +2,69 @@
 
 namespace MovieMatch\Controllers;
 
-use MovieMatch\Models\Database;
 use MovieMatch\Models\FilmList;
 use MovieMatch\Models\RecommendationsModel;
+use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 
 class HomeController extends Controller
 {
-  private Database $db;
+  private TMDBService $tmdb;
+  private Session $session;
 
-  public function __construct()
+  public function __construct(TMDBService $tmdb, Session $session)
   {
-    if (!isset($_SESSION)) {
-      session_start();
-    }
-    $this->db = new Database();
+    $this->tmdb = $tmdb;
+    $this->session = $session;
   }
 
   public function render()
   {
-    $filmListController = new FilmListController(new TMDBService());
-    $filmList = $filmListController->render();
+    $currentPage = $this->getCurrentPage();
+    $allFilms = $this->loadFilms($currentPage);
 
-    return $this->view("home", ["filmList" => $filmList]);
+    $filmsData = [];
+    foreach ($allFilms as $films) {
+      $filmsData = array_merge($filmsData, $films->results);
+    }
+
+    $filmList = new FilmList();
+    $filmList->addAll($filmsData);
+
+    $AI = new RecommendationsModel($filmList->getList());
+    $list = $AI->makeRecommendationList();
+
+    return $this->view("home", ['list' => $list, 'tmdb' => $this->tmdb]);
   }
 
-  public function loadOtherMovies(): void
+  private function getCurrentPage(): int
   {
-    $currentPage = $_SESSION['currentPage'] ?? 1;
+    return $_GET['page'] ?? 1;
+  }
+
+  private function loadFilms($currentPage)
+  {
+    $result = [];
+
+    for ($i = $currentPage; $i < $currentPage + 10; $i++) {
+      $result[] = $this->tmdb->getTopRated($i);
+    }
+
+    return $result;
+  }
+
+  public function request(): void
+  {
+    $currentPage = $this->session->get('currentPage');
 
     $newPage = $currentPage + 10;
-
-    $_SESSION['currentPage'] = $newPage;
+    $this->session->set('currentPage', $newPage);
 
     header("Location: http://moviematch.com/home?page=$newPage");
   }
 
   public function logout(): void
   {
-    $this->db->logout();
-    header("Location: /");
+    $this->session->logout();
   }
 }
