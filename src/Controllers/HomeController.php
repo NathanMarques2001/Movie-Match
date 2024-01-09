@@ -9,19 +9,11 @@ use MovieMatch\Models\TMDBService;
 
 class HomeController extends Controller
 {
-  private TMDBService $tmdb;
-  private Session $session;
-
-  public function __construct(TMDBService $tmdb, Session $session)
-  {
-    $this->tmdb = $tmdb;
-    $this->session = $session;
-  }
-
   public function render()
   {
+    $tmdb = new TMDBService();
     $currentPage = $this->getCurrentPage();
-    $allFilms = $this->loadFilms($currentPage);
+    $allFilms = $this->loadFilms($currentPage, $tmdb);
 
     $filmsData = [];
     foreach ($allFilms as $films) {
@@ -34,7 +26,7 @@ class HomeController extends Controller
     $AI = new RecommendationsModel($filmList->getList());
     $list = $AI->makeRecommendationList();
 
-    return $this->view("home", ['list' => $list, 'tmdb' => $this->tmdb]);
+    return $this->view("home", ['list' => $list, 'tmdb' => $tmdb]);
   }
 
   private function getCurrentPage(): int
@@ -42,12 +34,12 @@ class HomeController extends Controller
     return $_GET['page'] ?? 1;
   }
 
-  private function loadFilms($currentPage)
+  private function loadFilms(int $currentPage, TMDBService $tmdb)
   {
     $result = [];
 
     for ($i = $currentPage; $i < $currentPage + 10; $i++) {
-      $result[] = $this->tmdb->getTopRated($i);
+      $result[] = $tmdb->getTopRated($i);
     }
 
     return $result;
@@ -55,10 +47,12 @@ class HomeController extends Controller
 
   public function request(): void
   {
-    $currentPage = $this->session->get('currentPage');
+    $session = new Session();
+
+    $currentPage = $session->get('currentPage');
 
     $newPage = $currentPage + 10;
-    $this->session->set('currentPage', $newPage);
+    $session->set('currentPage', $newPage);
 
     header("Location: http://moviematch.com/home?page=$newPage");
   }

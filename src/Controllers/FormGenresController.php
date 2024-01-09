@@ -2,37 +2,30 @@
 
 namespace MovieMatch\Controllers;
 
+use MovieMatch\Models\Database;
 use MovieMatch\Models\GenreDatabase;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 
 class FormGenresController extends Controller
 {
-  private GenreDatabase $genreDatabase;
-  private TMDBService $tmdb;
-  private array $genres;
-  private Session $session;
-
-  public function __construct(TMDBService $tmdb, GenreDatabase $genreDatabase, Session $session)
-  {
-    $this->tmdb = $tmdb;
-    $this->genreDatabase = $genreDatabase;
-    $this->genres = $this->fillGenresArray();
-    $this->session = $session;
-  }
-
   public function render()
   {
-    return $this->view("form-genres", ['genres' => $this->genres]);
+    $genres = $this->fillGenresArray();
+
+    return $this->view("form-genres", ['genres' => $genres]);
   }
 
   public function request()
   {
-    $dbGenres = $this->getGenresDatabase();
+    $genreDatabase = new GenreDatabase(new Database());
+    $session = new Session();
+    $genres = $this->fillGenresArray();
+    $dbGenres = $this->getGenresDatabase($genreDatabase);
 
-    foreach ($this->genres as $genre) {
+    foreach ($genres as $genre) {
       if (isset($_POST[$genre])) {
-        $this->genreDatabase->createGenresAssessments($this->session->get('id'), $dbGenres[$genre], $_POST[$genre]);
+        $genreDatabase->createGenresAssessments($session->get('id'), $dbGenres[$genre], $_POST[$genre]);
       }
     }
 
@@ -41,8 +34,9 @@ class FormGenresController extends Controller
 
   private function fillGenresArray()
   {
+    $tmdb = new TMDBService();
     $genres = [];
-    $apiGenres = $this->tmdb->getGenres()->genres;
+    $apiGenres = $tmdb->getGenres()->genres;
 
     foreach ($apiGenres as $apiGenre) {
       $name = $apiGenre->name;
@@ -52,10 +46,10 @@ class FormGenresController extends Controller
     return $genres;
   }
 
-  private function getGenresDatabase()
+  private function getGenresDatabase(GenreDatabase $genreDatabase)
   {
     $dbGenres = array();
-    $allGenres = $this->genreDatabase->getGenres();
+    $allGenres = $genreDatabase->getGenres();
 
     if ($allGenres) {
       foreach ($allGenres as $genre) {

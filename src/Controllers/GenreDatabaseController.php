@@ -2,23 +2,18 @@
 
 namespace MovieMatch\Controllers;
 
+use MovieMatch\Models\Database;
 use MovieMatch\Models\GenreDatabase;
 use MovieMatch\Models\Session;
 
 class GenreDatabaseController
 {
-  private GenreDatabase $genreDatabase;
-  private Session $session;
-
-  public function __construct(GenreDatabase $genreDatabase, Session $session)
-  {
-    $this->genreDatabase = $genreDatabase;
-    $this->session = $session;
-  }
-
   public function request()
   {
-    if ($this->genreDatabase->checkGenreAssessment($this->session->get('id'))) {
+    $genreDatabase = new GenreDatabase(new Database());
+    $session = new Session();
+
+    if ($genreDatabase->checkGenreAssessment($session->get('id'))) {
       return true;
     }
     return false;

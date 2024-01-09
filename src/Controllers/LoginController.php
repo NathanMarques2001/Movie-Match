@@ -2,23 +2,13 @@
 
 namespace MovieMatch\Controllers;
 
+use MovieMatch\Models\Database;
 use MovieMatch\Models\GenreDatabase;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\UserDatabase;
 
 class LoginController extends Controller
 {
-  private UserDatabase $userDatabase;
-  private GenreDatabase $genreDatabase;
-  private Session $session;
-
-  public function __construct(UserDatabase $userDatabase, GenreDatabase $genreDatabase, Session $session)
-  {
-    $this->userDatabase = $userDatabase;
-    $this->genreDatabase = $genreDatabase;
-    $this->session = $session;
-  }
-
   public function render()
   {
     return $this->view("login");
@@ -26,21 +16,24 @@ class LoginController extends Controller
 
   public function request()
   {
+    $userDatabase = new UserDatabase(new Database());
+    $genreDatabase = new GenreDatabase(new Database());
+    $session = new Session();
     try {
       $email = $_POST['email'] ?? '';
       $password = $_POST['password'] ?? '';
 
-      $login = $this->userDatabase->findUser($email, $password);
+      $login = $userDatabase->findUser($email, $password);
 
       if ($login !== false) {
 
-        $this->session->start();
-        $this->session->set('id', $login['id']);
-        $this->session->set('name', $login['name']);
-        $this->session->set('currentPage', 1);
+        $session->start();
+        $session->set('id', $login['id']);
+        $session->set('name', $login['name']);
+        $session->set('currentPage', 1);
 
-        if ($this->session->get('genre_assessment') == null) {
-          $this->session->set('genre_assessment', $this->genreDatabase->checkGenreAssessment($login['id']));
+        if ($session->get('genre_assessment') == null) {
+          $session->set('genre_assessment', $genreDatabase->checkGenreAssessment($login['id']));
         }
 
         header('Location: /home');
