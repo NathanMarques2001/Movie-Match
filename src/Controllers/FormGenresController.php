@@ -2,60 +2,67 @@
 
 namespace MovieMatch\Controllers;
 
-use MovieMatch\Models\Database;
+use MovieMatch\Models\GenreDatabase;
+use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 
 class FormGenresController extends Controller
 {
-  private Database $db;
+  private GenreDatabase $genreDatabase;
+  private TMDBService $tmdb;
+  private array $genres;
+  private Session $session;
 
-  public function __construct()
+  public function __construct(TMDBService $tmdb, GenreDatabase $genreDatabase, Session $session)
   {
-    $this->db = new Database();
-    if (!isset($_SESSION)) {
-      session_start();
-    }
+    $this->tmdb = $tmdb;
+    $this->genreDatabase = $genreDatabase;
+    $this->genres = $this->fillGenresArray();
+    $this->session = $session;
   }
 
   public function render()
   {
+    return $this->view("form-genres", ['genres' => $this->genres]);
   }
 
-  public function renderFormPage(): void
+  public function request()
   {
-    require_once __DIR__ . '/../../templates/views/form-genres.php';
+    $dbGenres = $this->getGenresDatabase();
+
+    foreach ($this->genres as $genre) {
+      if (isset($_POST[$genre])) {
+        $this->genreDatabase->createGenresAssessments($this->session->get('id'), $dbGenres[$genre], $_POST[$genre]);
+      }
+    }
+
+    header('Location: /home');
   }
 
-  public function createUserGenresAssessments()
+  private function fillGenresArray()
   {
-    $tmdb = new TMDBService();
-    $apiGenres = $tmdb->getGenres()->genres;
     $genres = [];
+    $apiGenres = $this->tmdb->getGenres()->genres;
 
     foreach ($apiGenres as $apiGenre) {
       $name = $apiGenre->name;
       $genres[] = str_replace(' ', '-', $name);
     }
 
+    return $genres;
+  }
+
+  private function getGenresDatabase()
+  {
     $dbGenres = array();
+    $allGenres = $this->genreDatabase->getGenres();
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-      $allGenres = $this->db->getGenres();
-
-      if ($allGenres) {
-        foreach ($allGenres as $genre) {
-          $dbGenres[$genre["name"]] = $genre["id"];
-        }
+    if ($allGenres) {
+      foreach ($allGenres as $genre) {
+        $dbGenres[$genre["name"]] = $genre["id"];
       }
     }
 
-    foreach ($genres as $genre) {
-      if (isset($_POST[$genre])) {
-        $this->db->createGenresAssessments($_SESSION["id"], $dbGenres[$genre], $_POST[$genre]);
-      }
-    }
-
-    header('Location: /home');
+    return $dbGenres;
   }
 }

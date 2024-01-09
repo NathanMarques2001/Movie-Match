@@ -1,20 +1,6 @@
-<?php
-
-require_once __DIR__ . "/../layout/header.html";
-require_once __DIR__ . "/../layout/navbar.php";
-require_once __DIR__ . "/../../utils/translateGenres.php";
-
-use MovieMatch\Models\TMDBService;
-
-$tmdb = new TMDBService();
-$apiGenres = $tmdb->getGenres()->genres;
-$genres = [];
-
-foreach ($apiGenres as $apiGenre) {
-  $name = $apiGenre->name;
-  $genres[] = str_replace(' ', '-', $name);
-}
-?>
+<?php require_once __DIR__ . "/../layout/header.html"; ?>
+<?php require_once __DIR__ . "/../layout/navbar.php"; ?>
+<?php require_once __DIR__ . "/../../utils/translateGenres.php"; ?>
 
 <div id="modalGenre-container">
   <h1 id="modalGenre-title">Avalie os gêneros abaixo para prosseguir</h1>

@@ -62,9 +62,4 @@ class HomeController extends Controller
 
     header("Location: http://moviematch.com/home?page=$newPage");
   }
-
-  public function logout(): void
-  {
-    $this->session->logout();
-  }
 }
