@@ -32,10 +32,4 @@ class Session
     $this->start();
     $_SESSION[$key] = $value;
   }
-
-  public function logout()
-  {
-    $this->destroy();
-    header("Location: /");
-  }
 }

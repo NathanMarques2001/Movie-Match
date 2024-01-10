@@ -2,13 +2,13 @@
 
 namespace MovieMatch\Controllers;
 
-use MovieMatch\Models\Session;
+use MovieMatch\Models\Auth;
 
 class LogoutController
 {
   public function request(): void
   {
-    $session = new Session();
-    $session->logout();
+    $auth = new Auth();
+    $auth->logout();
   }
 }

@@ -3,7 +3,7 @@
 
 <body>
   <div id="films-container">
-    <h1>Recomendações de Filmes</h1>
+    <h1>Recomendações de Filmes<?= $_SESSION["id"]; ?></h1>
     <main id="films-slider">
       <?php foreach ($list as $film) : ?>
         <div class="card" style="margin-right: 1rem;">

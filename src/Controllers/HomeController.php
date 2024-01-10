@@ -13,7 +13,7 @@ class HomeController extends Controller
   public function render()
   {
     $redirect = new Redirect();
-    $redirect->userIsNotLoggedIn();
+    $redirect->redirectIfNotLoggedIn();
     $redirect->redirectIfNotRated();
 
     $tmdb = new TMDBService();

@@ -33,13 +33,13 @@ class Router
         'signup' => [SignUpController::class, 'request'],
         'home' => [HomeController::class, 'request'],
         'movie-detail' => [FilmController::class, 'request'],
-        'logout' => [LogoutController::class, 'request'],
       ],
     ];
-    if (isset($_POST["Logout"])) {
-      $this->setPath('logout');
-    }
-    if (isset($routes[$this->method][$this->path])) {
+
+    if ($this->method === 'POST' && isset($_POST["Logout"])) {
+      $logoutController = new LogoutController();
+      $logoutController->request();
+    } elseif (isset($routes[$this->method][$this->path])) {
       [$controllerClass, $method] = $routes[$this->method][$this->path];
       $controller = new $controllerClass();
 
@@ -47,10 +47,5 @@ class Router
     } else {
       http_response_code(404);
     }
-  }
-
-  private function setPath(string $path)
-  {
-    $this->path = $path;
   }
 }

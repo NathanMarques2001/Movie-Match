@@ -13,7 +13,7 @@ class FormGenresController extends Controller
   public function render()
   {
     $redirect = new Redirect();
-    $redirect->userIsNotLoggedIn();
+    $redirect->redirectIfNotLoggedIn();
     $redirect->redirectIfAlreadyRated();
 
     $genres = $this->fillGenresArray();

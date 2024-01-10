@@ -11,7 +11,7 @@ class SignUpController extends Controller
   public function render()
   {
     $redirect = new Redirect();
-    $redirect->userIsLoggedIn();
+    $redirect->redirectIfIsLoggedIn();
 
     return $this->view("signup");
   }

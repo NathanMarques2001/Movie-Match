@@ -26,23 +26,19 @@ class Redirect
     }
   }
 
-  public function userIsLoggedIn()
+  public function redirectIfIsLoggedIn()
   {
-    $session = new Session();
-
-    if ($session->get('id') != null) {
-      header('Location: /home');
-      exit();
+    $auth = new Auth();
+    if ($auth->isLoggedIn()) {
+      header("Location: /home");
     }
   }
 
-  public function userIsNotLoggedIn()
+  public function redirectIfNotLoggedIn()
   {
-    $session = new Session();
-
-    if ($session->get('id') == null) {
-      header('Location: /');
-      exit();
+    $auth = new Auth();
+    if (!$auth->isLoggedIn()) {
+      header("Location: /");
     }
   }
 }
