@@ -4,6 +4,7 @@ namespace MovieMatch\Controllers;
 
 use MovieMatch\Models\Database;
 use MovieMatch\Models\GenreDatabase;
+use MovieMatch\Models\Redirect;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 
@@ -11,6 +12,10 @@ class FormGenresController extends Controller
 {
   public function render()
   {
+    $redirect = new Redirect();
+    $redirect->userIsNotLoggedIn();
+    $redirect->redirectIfAlreadyRated();
+
     $genres = $this->fillGenresArray();
 
     return $this->view("form-genres", ['genres' => $genres]);

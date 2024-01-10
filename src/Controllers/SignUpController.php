@@ -3,12 +3,16 @@
 namespace MovieMatch\Controllers;
 
 use MovieMatch\Models\Database;
+use MovieMatch\Models\Redirect;
 use MovieMatch\Models\UserDatabase;
 
 class SignUpController extends Controller
 {
   public function render()
   {
+    $redirect = new Redirect();
+    $redirect->userIsLoggedIn();
+
     return $this->view("signup");
   }
 

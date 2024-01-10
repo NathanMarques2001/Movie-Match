@@ -4,6 +4,7 @@ namespace MovieMatch\Controllers;
 
 use MovieMatch\Models\FilmList;
 use MovieMatch\Models\RecommendationsModel;
+use MovieMatch\Models\Redirect;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 
@@ -11,6 +12,10 @@ class HomeController extends Controller
 {
   public function render()
   {
+    $redirect = new Redirect();
+    $redirect->userIsNotLoggedIn();
+    $redirect->redirectIfNotRated();
+
     $tmdb = new TMDBService();
     $currentPage = $this->getCurrentPage();
     $allFilms = $this->loadFilms($currentPage, $tmdb);

@@ -1,18 +1,12 @@
 <?php
 
+namespace MovieMatch\Config;
+
 use MovieMatch\Controllers\LoginController;
 use MovieMatch\Controllers\SignUpController;
 use MovieMatch\Controllers\LogoutController;
-use MovieMatch\Controllers\FormGenresController;
-use MovieMatch\Controllers\GenreDatabaseController;
 use MovieMatch\Controllers\HomeController;
 use MovieMatch\Controllers\FilmController;
-use MovieMatch\Models\Database;
-use MovieMatch\Models\FilmDatabase;
-use MovieMatch\Models\GenreDatabase;
-use MovieMatch\Models\Session;
-use MovieMatch\Models\TMDBService;
-use MovieMatch\Models\UserDatabase;
 
 class Router
 {
@@ -28,27 +22,35 @@ class Router
   public function route()
   {
     $routes = [
-      'GET|/' => [LoginController::class, 'render'],
-      'POST|/login' => [LoginController::class, 'request'],
-      'GET|/signup' => [SignUpController::class, 'render'],
-      'POST|/signup' => [SignUpController::class, 'request'],
-      'POST|/logout' => [LogoutController::class, 'request'],
-      
+      'GET' => [
+        '' => [LoginController::class, 'render'],
+        'signup' => [SignUpController::class, 'render'],
+        'home' => [HomeController::class, 'render'],
+        'movie-detail' => [FilmController::class, 'render'],
+      ],
+      'POST' => [
+        '' => [LoginController::class, 'request'],
+        'signup' => [SignUpController::class, 'request'],
+        'home' => [HomeController::class, 'request'],
+        'movie-detail' => [FilmController::class, 'request'],
+        'logout' => [LogoutController::class, 'request'],
+      ],
     ];
-
-    $key = "$this->method|$this->path";
-
-    if (isset($routes[$key])) {
-      [$controllerClass, $method] = $routes[$key];
-      $controller = new $controllerClass(
-        new UserDatabase(new Database()),
-        new GenreDatabase(new Database()),
-        new Session()
-      );
+    if (isset($_POST["Logout"])) {
+      $this->setPath('logout');
+    }
+    if (isset($routes[$this->method][$this->path])) {
+      [$controllerClass, $method] = $routes[$this->method][$this->path];
+      $controller = new $controllerClass();
 
       $controller->$method();
     } else {
-      echo "Rota não encontrada!";
+      http_response_code(404);
     }
+  }
+
+  private function setPath(string $path)
+  {
+    $this->path = $path;
   }
 }

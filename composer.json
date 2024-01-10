@@ -2,7 +2,8 @@
     "autoload": {
         "psr-4": {
             "MovieMatch\\": "src/",
-            "MovieMatch\\Tests\\": "tests/"
+            "MovieMatch\\Tests\\": "tests/",
+            "MovieMatch\\Config\\": "config/"
         }
     },
     "require-dev": {

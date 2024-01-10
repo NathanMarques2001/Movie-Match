@@ -4,6 +4,7 @@ namespace MovieMatch\Controllers;
 
 use MovieMatch\Models\Database;
 use MovieMatch\Models\GenreDatabase;
+use MovieMatch\Models\Redirect;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\UserDatabase;
 
@@ -11,6 +12,9 @@ class LoginController extends Controller
 {
   public function render()
   {
+    $redirect = new Redirect();
+    $redirect->userIsLoggedIn();
+
     return $this->view("login");
   }
 
@@ -34,6 +38,13 @@ class LoginController extends Controller
 
         if ($session->get('genre_assessment') == null) {
           $session->set('genre_assessment', $genreDatabase->checkGenreAssessment($login['id']));
+        }
+
+        $genreDatabaseController = new GenreDatabaseController();
+
+        if (!$genreDatabaseController->request()) {
+          header('Location: /first-login');
+          exit();
         }
 
         header('Location: /home');

@@ -5,6 +5,7 @@ namespace MovieMatch\Controllers;
 use MovieMatch\Models\Database;
 use MovieMatch\Models\Film;
 use MovieMatch\Models\FilmDatabase;
+use MovieMatch\Models\Redirect;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 
@@ -12,6 +13,10 @@ class FilmController extends Controller
 {
   public function render()
   {
+    $redirect = new Redirect();
+    $redirect->userIsNotLoggedIn();
+    $redirect->redirectIfNotRated();
+
     $tmdb = new TMDBService();
 
     $filmID = $this->getFilmIDFromURL();
