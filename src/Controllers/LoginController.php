@@ -51,8 +51,9 @@ class LoginController extends Controller
         exit();
       }
     } catch (\Exception $e) {
-      echo $e->getMessage();
+      $redirect = new Redirect();
+      $redirect->handlerError($e);
+      exit();
     }
-    exit();
   }
 }

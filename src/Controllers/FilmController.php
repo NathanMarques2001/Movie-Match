@@ -51,7 +51,9 @@ class FilmController extends Controller
         header('Location: /home');
         exit();
       } catch (\Exception $e) {
-        echo $e->getMessage();
+        $redirect = new Redirect();
+        $redirect->handlerError($e);
+        exit();
       }
     }
   }

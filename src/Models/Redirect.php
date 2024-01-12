@@ -41,4 +41,9 @@ class Redirect
       header("Location: /");
     }
   }
+
+  public function handlerError(\Exception $e)
+  {
+    header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?error=" . $e->getMessage());
+  }
 }

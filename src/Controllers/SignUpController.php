@@ -26,9 +26,12 @@ class SignUpController extends Controller
 
       if ($userDatabase->registerUser($name, $email, $password)) {
         header('Location: /');
+        exit();
       }
     } catch (\Exception $e) {
-      echo $e->getMessage();
+      $redirect = new Redirect();
+      $redirect->handlerError($e);
+      exit();
     }
   }
 }
