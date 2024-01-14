@@ -79,4 +79,20 @@ class UserDatabase
     }
     throw new \Exception("Erro na execução da consulta.");
   }
+
+  public function getMovieList(int $userId)
+  {
+    $query = "SELECT * FROM user_list WHERE id_user = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $userId);
+    if ($stmt->execute()) {
+      $genres = $stmt->fetchAll();
+      if ($genres) {
+        return $genres;
+      }
+      return [];
+    }
+    throw new \Exception("Erro na execução da consulta.");
+  }
 }
