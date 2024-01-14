@@ -2,6 +2,8 @@
 
 namespace MovieMatch\Config;
 
+use MovieMatch\Controllers\AssessmentsController;
+use MovieMatch\Controllers\ListController;
 use MovieMatch\Controllers\LoginController;
 use MovieMatch\Controllers\SignUpController;
 use MovieMatch\Controllers\LogoutController;
@@ -27,12 +29,16 @@ class Router
         'signup' => [SignUpController::class, 'render'],
         'home' => [HomeController::class, 'render'],
         'movie-detail' => [FilmController::class, 'render'],
+        'list' => [ListController::class, 'render'],
+        'assessments' => [AssessmentsController::class, 'render'],
       ],
       'POST' => [
         '' => [LoginController::class, 'request'],
         'signup' => [SignUpController::class, 'request'],
         'home' => [HomeController::class, 'request'],
         'movie-detail' => [FilmController::class, 'request'],
+        'list' => [ListController::class, 'request'],
+        'assessments' => [AssessmentsController::class, 'request'],
       ],
     ];
 
