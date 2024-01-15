@@ -46,4 +46,16 @@ class FilmDatabase
     }
     throw new \Exception("Erro ao avaliar filme!");
   }
+
+  public function removeFromList(int $filmID)
+  {
+    $query = "DELETE FROM user_list WHERE id_film = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $filmID);
+    if ($stmt->execute()) {
+      return true;
+    }
+    throw new \Exception("Erro ao retirar da lista!");
+  }
 }

@@ -4,6 +4,7 @@ namespace MovieMatch\Controllers;
 
 use MovieMatch\Models\Database;
 use MovieMatch\Models\Film;
+use MovieMatch\Models\FilmDatabase;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
 use MovieMatch\Models\UserDatabase;
@@ -21,6 +22,12 @@ class ListController extends Controller
 
   public function request()
   {
+    if (isset($_POST["film_id"])) {
+      $filmDB = new FilmDatabase(new Database());
+      $filmDB->removeFromList($_POST["film_id"]);
+
+      header("Location: http://moviematch.com/list");
+    }
   }
 
   private function getList()
