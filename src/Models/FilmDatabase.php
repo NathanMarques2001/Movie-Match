@@ -58,4 +58,16 @@ class FilmDatabase
     }
     throw new \Exception("Erro ao retirar da lista!");
   }
+
+  public function removeAssessment(int $filmID)
+  {
+    $query = "DELETE FROM rated_films WHERE id_film = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $filmID);
+    if ($stmt->execute()) {
+      return true;
+    }
+    throw new \Exception("Erro ao remover avaliação!");
+  }
 }

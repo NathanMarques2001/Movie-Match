@@ -21,6 +21,12 @@ class AssessmentsController extends Controller
 
   public function request()
   {
+    if (isset($_POST["film_id"])) {
+      $filmDB = new FilmDatabase(new Database());
+      $filmDB->removeAssessment($_POST["film_id"]);
+
+      header("Location: http://moviematch.com/assessments");
+    }
   }
 
   private function getList()
