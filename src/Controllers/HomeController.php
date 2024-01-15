@@ -2,6 +2,8 @@
 
 namespace MovieMatch\Controllers;
 
+use MovieMatch\Models\Database;
+use MovieMatch\Models\FilmDatabase;
 use MovieMatch\Models\FilmList;
 use MovieMatch\Models\RecommendationsModel;
 use MovieMatch\Models\Redirect;
@@ -60,5 +62,24 @@ class HomeController extends Controller
     $session->set('currentPage', $newPage);
 
     header("Location: http://moviematch.com/home?page=$newPage");
+  }
+
+  public function notInterested()
+  {
+    $filmdb = new FilmDatabase(new Database());
+    $session = new Session();
+
+    if (isset($_POST["film_id"])) {
+      try {
+        $notLiked = 0;
+        $filmdb->rateFilm($session->get('id'), $_POST["film_id"], $_POST["film_overview"], $notLiked);
+        header('Location: /home');
+        exit();
+      } catch (\Exception $e) {
+        $redirect = new Redirect();
+        $redirect->handlerError($e);
+        exit();
+      }
+    }
   }
 }

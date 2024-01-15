@@ -12,6 +12,11 @@
             <h5 class="card-title"><?= $film->getTitle() ?></h5>
             <p class="card-text" style="height: 320px; overflow: auto;"><?= $film->getOverview() ?></p>
             <a href="http://moviematch.com/movie-detail/<?= $film->getID() ?>" class="btn btn-primary">Mais Detalhes</a>
+            <form action="http://moviematch.com/not-interested" method="POST">
+              <input type="hidden" name="film_id" value="<?= $film->getId() ?>">
+              <input type="hidden" name="film_overview" value="<?= $film->getOverview() ?>">
+              <button class="btn btn-primary">Não me interessa</button>
+            </form>
           </div>
         </div>
       <?php endforeach; ?>

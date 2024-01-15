@@ -42,7 +42,8 @@ class Router
         'list' => [ListController::class, 'request'],
         'assessments' => [AssessmentsController::class, 'request'],
         'first-login' => [FormGenresController::class, 'request'],
-        'logout' => [LogoutController::class, 'request']
+        'logout' => [LogoutController::class, 'request'],
+        'not-interested' => [HomeController::class, 'notInterested'],
       ],
     ];
 
