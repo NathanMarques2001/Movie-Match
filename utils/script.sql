@@ -34,6 +34,13 @@ CREATE TABLE IF NOT EXISTS `movie_match`.rated_films (
     CONSTRAINT fk_rated_films_users FOREIGN KEY (id_user) REFERENCES `movie_match`.users (id) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) engine=InnoDB;
 
+-- Tabela 'user_list'
+CREATE TABLE IF NOT EXISTS `movie_match`.user_list ( 
+    id_user INT NOT NULL,
+    id_film INT NOT NULL,
+    CONSTRAINT fk_user_list FOREIGN KEY (id_user) REFERENCES `movie_match`.users (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+) engine=InnoDB;
+
 -- Populando tabelas com dados padrões
 INSERT IGNORE INTO genres (id, name)
 VALUES
