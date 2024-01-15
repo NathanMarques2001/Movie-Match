@@ -9,6 +9,7 @@ use MovieMatch\Controllers\SignUpController;
 use MovieMatch\Controllers\LogoutController;
 use MovieMatch\Controllers\HomeController;
 use MovieMatch\Controllers\FilmController;
+use MovieMatch\Controllers\FormGenresController;
 
 class Router
 {
@@ -31,6 +32,7 @@ class Router
         'movie-detail' => [FilmController::class, 'render'],
         'list' => [ListController::class, 'render'],
         'assessments' => [AssessmentsController::class, 'render'],
+        'first-login' => [FormGenresController::class, 'render']
       ],
       'POST' => [
         '' => [LoginController::class, 'request'],
@@ -39,13 +41,12 @@ class Router
         'movie-detail' => [FilmController::class, 'request'],
         'list' => [ListController::class, 'request'],
         'assessments' => [AssessmentsController::class, 'request'],
+        'first-login' => [FormGenresController::class, 'request'],
+        'logout' => [LogoutController::class, 'request']
       ],
     ];
 
-    if ($this->method === 'POST' && isset($_POST["Logout"])) {
-      $logoutController = new LogoutController();
-      $logoutController->request();
-    } elseif (isset($routes[$this->method][$this->path])) {
+    if (isset($routes[$this->method][$this->path])) {
       [$controllerClass, $method] = $routes[$this->method][$this->path];
       $controller = new $controllerClass();
 

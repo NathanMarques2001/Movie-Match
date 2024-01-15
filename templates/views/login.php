@@ -1,7 +1,7 @@
 <?php require_once __DIR__ . "/../layout/header.html"; ?>
 
 <body id="login-container">
-  <form action="" method="POST" id="login-form" class="bg-light">
+  <form action="http://moviematch.com/" method="POST" id="login-form" class="bg-light">
     <div class="mb-2" id="login-div-logo-title">
       <img src="http://moviematch.com/assets/login-logo.png" alt="Logo">
       <p>

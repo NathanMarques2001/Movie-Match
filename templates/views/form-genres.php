@@ -4,7 +4,7 @@
 
 <div id="modalGenre-container">
   <h1 id="modalGenre-title">Avalie os gêneros abaixo para prosseguir</h1>
-  <form method="POST" id="modalGenre-form">
+  <form action="http://moviematch.com/first-login" method="POST" id="modalGenre-form">
     <?php foreach ($genres as $genre) : ?>
       <div id="modalGenre-form-div">
         <h5><?= translateGenres($genre) ?></h5>

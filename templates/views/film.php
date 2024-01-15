@@ -38,7 +38,7 @@
         <p id="filmDetail-tagline"><?= $movie->getTagline() ?></p>
         <h4>Sinopse</h4>
         <p><?= $movie->getOverview() ?></p>
-        <form method="POST" id="filmDetail-btn-container">
+        <form action="http://moviematch.com/movie-detail" method="POST" id="filmDetail-btn-container">
           <input type="hidden" name="film_id" value="<?= $movie->getId() ?>">
           <input type="hidden" name="film_overview" value="<?= htmlspecialchars($movie->getOverview()) ?>">
           <button type="submit" name="liked" class="filmDetail-btn" id="filmDetail-btnLiked">Gostei</button>

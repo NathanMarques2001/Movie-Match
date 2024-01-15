@@ -15,7 +15,7 @@
           <a class="link-light" href="http://moviematch.com/assessments">Avaliações</a>
         </li>
       </ul>
-      <form class="d-flex" method="POST">
+      <form action="http://moviematch.com/logout" class="d-flex" method="POST">
         <button class="btn btn-light" type="submit" name="Logout">Sair</button>
       </form>
     </div>
