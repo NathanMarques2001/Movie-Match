@@ -44,6 +44,7 @@ class Router
         'first-login' => [FormGenresController::class, 'request'],
         'logout' => [LogoutController::class, 'request'],
         'not-interested' => [HomeController::class, 'notInterested'],
+        'add-list' => [HomeController::class, 'addMovieToList'],
       ],
     ];
 

@@ -86,6 +86,7 @@ class UserDatabase
 
     $stmt = $this->connection->prepare($query);
     $stmt->bindValue(1, $userId);
+    
     if ($stmt->execute()) {
       $genres = $stmt->fetchAll();
       if ($genres) {
@@ -94,5 +95,19 @@ class UserDatabase
       return [];
     }
     throw new \Exception("Erro na execução da consulta.");
+  }
+
+  public function addMovieToList(int $userId, int $movieId)
+  {
+    $query = "INSERT INTO user_list (id_user, id_film) VALUES (?,?)";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $userId);
+    $stmt->bindValue(2, $movieId);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+    throw new \Exception("Erro na criação do registro.");
   }
 }

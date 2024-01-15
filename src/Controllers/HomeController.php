@@ -9,6 +9,7 @@ use MovieMatch\Models\RecommendationsModel;
 use MovieMatch\Models\Redirect;
 use MovieMatch\Models\Session;
 use MovieMatch\Models\TMDBService;
+use MovieMatch\Models\UserDatabase;
 
 class HomeController extends Controller
 {
@@ -73,6 +74,24 @@ class HomeController extends Controller
       try {
         $notLiked = 0;
         $filmdb->rateFilm($session->get('id'), $_POST["film_id"], $_POST["film_overview"], $notLiked);
+        header('Location: /home');
+        exit();
+      } catch (\Exception $e) {
+        $redirect = new Redirect();
+        $redirect->handlerError($e);
+        exit();
+      }
+    }
+  }
+
+  public function addMovieToList()
+  {
+    $userDB = new UserDatabase(new Database());
+    $session = new Session();
+
+    if (isset($_POST["film_id"])) {
+      try {
+        $userDB->addMovieToList($session->get('id'), $_POST["film_id"]);
         header('Location: /home');
         exit();
       } catch (\Exception $e) {
