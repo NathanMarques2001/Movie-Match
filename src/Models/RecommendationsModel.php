@@ -7,13 +7,11 @@ class RecommendationsModel
   private User $user;
   private NLPProcessor $NLPProcessor;
   private RecommendationEngine $recommendationEngine;
-  private Database $db;
   private array $filmList;
 
   public function __construct(array $filmList)
   {
     $this->filmList = $filmList;
-    $this->db = new Database();
     $this->user = new User($_SESSION["name"], $this->getUserGrades(), $this->getRatedFilms());
     $this->NLPProcessor = new NLPProcessor();
     $this->recommendationEngine = new RecommendationEngine($this->user);
@@ -88,7 +86,8 @@ class RecommendationsModel
 
   private function getUserGrades()
   {
-    $grades = $this->db->getGenreAssessment($_SESSION["id"]);
+    $genresDB = new GenreDatabase(new Database());
+    $grades = $genresDB->getGenreAssessment($_SESSION["id"]);
 
     $finalGrades = array();
     foreach ($grades as $grade) {
@@ -100,6 +99,7 @@ class RecommendationsModel
 
   private function getRatedFilms()
   {
-    return $this->db->getRatedFilms($_SESSION["id"]);
+    $filmsDB = new FilmDatabase(new Database());
+    return $filmsDB->getRatedFilms($_SESSION["id"]);
   }
 }
