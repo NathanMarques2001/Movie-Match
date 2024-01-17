@@ -71,8 +71,6 @@ Inicie o servidor e acesse o projeto através do navegador.
 
 **views/:** Arquivos de visualização HTML/PHP.
 
-README.md: Documentação do projeto.
-
 # Requisitos do Sistema
 
 - PHP 7.0 ou superior.
