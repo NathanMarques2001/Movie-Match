@@ -1,0 +1,23 @@
+.home-card {
+  margin-right: 1rem;
+}
+
+.home-card-title {
+  min-height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-card-text {
+  height: 320px;
+  overflow: auto;
+}
+
+.home-btn {
+  width: 95%;
+}
+
+.home-btn-more-recommendations {
+  width: 60%;
+}
