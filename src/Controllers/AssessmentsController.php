@@ -49,7 +49,7 @@ class AssessmentsController extends Controller
     $listAux = [];
     foreach ($list as $movie) {
       $film = $this->getMovieData($movie);
-      $listAux[] = new Film(
+      $filmAux = new Film(
         $film->title,
         $film->overview,
         $film->release_date,
@@ -61,6 +61,8 @@ class AssessmentsController extends Controller
         $film->tagline,
         $film->id
       );
+      $filmAux->setUserGrade($movie["rated"]);
+      $listAux[] = $filmAux;
     }
 
     return $listAux;
