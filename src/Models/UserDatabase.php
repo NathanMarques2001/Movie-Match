@@ -86,7 +86,7 @@ class UserDatabase
 
     $stmt = $this->connection->prepare($query);
     $stmt->bindValue(1, $userId);
-    
+
     if ($stmt->execute()) {
       $genres = $stmt->fetchAll();
       if ($genres) {
@@ -99,6 +99,15 @@ class UserDatabase
 
   public function addMovieToList(int $userId, int $movieId)
   {
+    $filmList = $this->getMovieList($userId);
+    if (!empty($filmList)) {
+      foreach ($filmList as $film) {
+        if ($film['id_film'] == $movieId) {
+          throw new \Exception("Filme já está na lista!");
+        }
+      }
+    }
+
     $query = "INSERT INTO user_list (id_user, id_film) VALUES (?,?)";
 
     $stmt = $this->connection->prepare($query);

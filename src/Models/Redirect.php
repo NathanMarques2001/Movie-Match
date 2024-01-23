@@ -42,8 +42,12 @@ class Redirect
     }
   }
 
-  public function handlerError(\Exception $e)
+  public function handlerError(\Exception $e, string $url = "")
   {
-    header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?error=" . $e->getMessage());
+    $urlDefault = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if ($url != "") {
+      $urlDefault = $url;
+    }
+    header("Location: $urlDefault?error=" . $e->getMessage());
   }
 }

@@ -96,7 +96,7 @@ class HomeController extends Controller
         exit();
       } catch (\Exception $e) {
         $redirect = new Redirect();
-        $redirect->handlerError($e);
+        $redirect->handlerError($e, "/home");
         exit();
       }
     }
