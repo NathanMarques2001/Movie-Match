@@ -33,6 +33,15 @@ class FilmDatabase
 
   public function rateFilm(int $userId, int $filmId, string $overview, int $rated)
   {
+    $ratedFilms = $this->getRatedFilms($userId);
+    if (!empty($ratedFilms)) {
+      foreach ($ratedFilms as $ratedFilm) {
+        if ($ratedFilm['id_film'] == $filmId) {
+          throw new \Exception("Filme já avaliado!");
+        }
+      }
+    }
+
     $query = "INSERT INTO rated_films (id_user, id_film, overview, rated) VALUES (?,?,?,?)";
 
     $stmt = $this->connection->prepare($query);

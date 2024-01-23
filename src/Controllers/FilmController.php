@@ -61,7 +61,7 @@ class FilmController extends Controller
   private function getFilmIDFromURL(): int
   {
     $url = $_SERVER['REQUEST_URI'];
-    $pattern = '/\/(\d+)\/?$/';
+    $pattern = '/\/(\d+)/';
 
     if (preg_match($pattern, $url, $matches)) {
       return (int)$matches[1];

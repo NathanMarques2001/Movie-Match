@@ -13,11 +13,11 @@
             <p class="card-text home-card-text"><?= $film->getOverview() ?></p>
             <a href="http://moviematch.com/movie-detail/<?= $film->getID() ?>" class="btn btn-info home-btn">Mais Detalhes</a>
             <form action="http://moviematch.com/add-list" method="POST">
-              <input type="hidden" name="film_id" value="<?= $film->getId() ?>">
+              <input type="hidden" name="film_id" value="<?= $film->getID() ?>">
               <button class="btn btn-success home-btn">Adicionar a lista</button>
             </form>
             <form action="http://moviematch.com/not-interested" method="POST">
-              <input type="hidden" name="film_id" value="<?= $film->getId() ?>">
+              <input type="hidden" name="film_id" value="<?= $film->getID() ?>">
               <input type="hidden" name="film_overview" value="<?= $film->getOverview() ?>">
               <button class="btn btn-danger home-btn">Não me interessa</button>
             </form>
