@@ -38,12 +38,17 @@
         <p id="filmDetail-tagline"><?= $movie->getTagline() ?></p>
         <h4>Sinopse</h4>
         <p><?= $movie->getOverview() ?></p>
-        <form action="http://moviematch.com/movie-detail/<?= $movie->getID() ?>" method="POST" id="filmDetail-btn-container">
-          <input type="hidden" name="film_id" value="<?= $movie->getID() ?>">
-          <input type="hidden" name="film_overview" value="<?= htmlspecialchars($movie->getOverview()) ?>">
-          <button type="submit" name="liked" class="filmDetail-btn" id="filmDetail-btnLiked">Gostei</button>
-          <button type="submit" name="notLiked" class="filmDetail-btn" id="filmDetail-btnNotLiked">Não Gostei</button>
-        </form>
+        <?php if ($filmRated == null) : ?>
+          <form action="http://moviematch.com/movie-detail/<?= $movie->getID() ?>" method="POST" id="filmDetail-btn-container">
+            <input type="hidden" name="film_id" value="<?= $movie->getID() ?>">
+            <input type="hidden" name="film_overview" value="<?= htmlspecialchars($movie->getOverview()) ?>">
+            <button type="submit" name="liked" class="filmDetail-btn" id="filmDetail-btnLiked">Gostei</button>
+            <button type="submit" name="notLiked" class="filmDetail-btn" id="filmDetail-btnNotLiked">Não Gostei</button>
+          </form>
+        <?php endif; ?>
+        <?php if ($filmRated != null) : ?>
+          <h1><?= $filmRated['rated'] == 1 ? "Gostou" : "Não gostou"?></h1>
+        <?php endif; ?>
       </div>
     </div>
   </div>

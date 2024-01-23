@@ -15,6 +15,23 @@ class FilmDatabase
     $this->connection = $this->database->getConnection();
   }
 
+  public function getRatedFilm(int $userId, int $filmId)
+  {
+    $query = "SELECT * FROM rated_films WHERE id_user = ? AND id_film = ?;";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindValue(1, $userId);
+    $stmt->bindValue(2, $filmId);
+    if ($stmt->execute()) {
+      $film = $stmt->fetch();
+      if ($film) {
+        return $film;
+      }
+      return null;
+    }
+    throw new \Exception("Erro na execução da consulta.");
+  }
+
   public function getRatedFilms(int $userId)
   {
     $query = "SELECT * FROM rated_films WHERE id_user = ?;";

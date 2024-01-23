@@ -36,7 +36,11 @@ class FilmController extends Controller
       $film->id
     );
 
-    return $this->view("film", ["tmdb" => $tmdb, "movie" => $movie]);
+    $filmDB = new FilmDatabase(new Database());
+    $session = new Session();
+    $filmRated = $filmDB->getRatedFilm($session->get('id'), $filmID);
+
+    return $this->view("film", ["tmdb" => $tmdb, "movie" => $movie, "filmRated" => $filmRated]);
   }
 
   public function request()
