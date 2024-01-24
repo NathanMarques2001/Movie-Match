@@ -133,3 +133,11 @@
 #filmDetail-btnNotLiked:hover {
   background-color: #b33423;
 }
+
+#filmDetail-div-liked {
+  width: 100%;
+  padding: 1%;
+  margin-top: 5%;
+  border-radius: 5px;
+  text-align: center;
+}

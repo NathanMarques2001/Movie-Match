@@ -47,7 +47,9 @@
           </form>
         <?php endif; ?>
         <?php if ($filmRated != null) : ?>
-          <h1><?= $filmRated['rated'] == 1 ? "Gostou" : "Não gostou"?></h1>
+          <div id="filmDetail-div-liked" style="background-color: <?= $filmRated['rated'] == 1 ? "green" : "red" ?>">
+            <h4><?= $filmRated['rated'] == 1 ? "Você gostou desse filme" : "Você não gostou desse filme" ?></h4>
+          </div>
         <?php endif; ?>
       </div>
     </div>
