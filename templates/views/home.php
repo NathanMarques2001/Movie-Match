@@ -12,10 +12,20 @@
             <h5 class="card-title home-card-title"><?= $film->getTitle() ?></h5>
             <p class="card-text home-card-text"><?= $film->getOverview() ?></p>
             <a href="http://moviematch.com/movie-detail/<?= $film->getID() ?>" class="btn btn-info home-btn">Mais Detalhes</a>
-            <form action="http://moviematch.com/add-list" method="POST">
-              <input type="hidden" name="film_id" value="<?= $film->getID() ?>">
-              <button class="btn btn-success home-btn">Adicionar a lista</button>
-            </form>
+            <?php $inList = false; ?>
+            <?php foreach ($rated as $rat) : ?>
+              <?php if ($film->getID() == $rat['id_film']) : ?>
+                <?php $inList = true; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if ($inList) : ?>
+              <button class="btn btn-success home-btn" disabled>Já está na lista</button>
+            <?php else : ?>
+              <form action="http://moviematch.com/add-list" method="POST">
+                <input type="hidden" name="film_id" value="<?= $film->getID() ?>">
+                <button class="btn btn-success home-btn">Adicionar a lista</button>
+              </form>
+            <?php endif; ?>
             <form action="http://moviematch.com/not-interested" method="POST">
               <input type="hidden" name="film_id" value="<?= $film->getID() ?>">
               <input type="hidden" name="film_overview" value="<?= $film->getOverview() ?>">

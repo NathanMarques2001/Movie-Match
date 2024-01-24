@@ -88,9 +88,9 @@ class UserDatabase
     $stmt->bindValue(1, $userId);
 
     if ($stmt->execute()) {
-      $genres = $stmt->fetchAll();
-      if ($genres) {
-        return $genres;
+      $movies = $stmt->fetchAll();
+      if ($movies) {
+        return $movies;
       }
       return [];
     }

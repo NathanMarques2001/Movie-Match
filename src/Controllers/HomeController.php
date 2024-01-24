@@ -34,7 +34,11 @@ class HomeController extends Controller
     $AI = new RecommendationsModel($filmList->getList());
     $list = $AI->makeRecommendationList();
 
-    return $this->view("home", ['list' => $list, 'tmdb' => $tmdb]);
+    $userDB = new UserDatabase(new Database());
+    $session = new Session();
+    $rated = $userDB->getMovieList($session->get('id'));
+
+    return $this->view("home", ['list' => $list, 'tmdb' => $tmdb, 'rated' => $rated]);
   }
 
   private function getCurrentPage(): int
