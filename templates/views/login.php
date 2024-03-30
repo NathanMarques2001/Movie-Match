@@ -18,7 +18,7 @@
       <label for="floatingPassword">Senha</label>
       <div class="error-message"></div>
     </div>
-    <button type="submit" class="btn btn-primary btn-lg mb-2 mt-3" name="Login" id="login-btn-entrar">Entrar</button>
+    <button type="submit" class="btn btn-dark btn-lg mb-2 mt-3" name="Login" id="login-btn-entrar">Entrar</button>
     <p><a class="link-offset-2 link-underline link-underline-opacity-100" href="http://moviematch.com/signup">Criar Conta</a></p>
   </form>
 </body>

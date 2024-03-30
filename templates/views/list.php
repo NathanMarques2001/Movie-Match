@@ -2,9 +2,10 @@
 <?php require_once __DIR__ . "/../layout/navbar.php"; ?>
 
 <body id="list-body">
+  <h2>Sua Lista de Filmes</h2>
   <main id="list-container">
     <?php if (empty($movieList)) : ?>
-      <h1 id="list-text"><?= "Você ainda não adicionou nada a sua lista!" ?></h1>
+      <h3 id="list-text"><?= "Você ainda não adicionou nada a sua lista!" ?></h3>
     <?php endif; ?>
     <?php foreach ($movieList as $film) : ?>
       <div class="card list-card">

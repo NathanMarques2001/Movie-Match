@@ -1,5 +1,12 @@
 #list-body {
-  background-color: #060738;
+  background-color: #17131e;
+  text-align: center;
+}
+
+#list-body h2 {
+  color: #ffffff;
+  padding: 2% 0;
+  border-bottom: 1px solid #ffffff;
 }
 
 #list-container {
@@ -9,7 +16,7 @@
   min-height: 80vh;
   flex-wrap: wrap;
   gap: 2%;
-  margin-top: 4%;
+  margin-top: 2%;
 }
 
 #list-text {
@@ -19,6 +26,7 @@
 .list-card {
   width: 18rem;
   margin-bottom: 2%;
+  background-color: #22232d;
 }
 
 .list-card-title {
@@ -27,6 +35,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: #FFFFFF;
+  border-bottom: 1px solid #ffffff;
 }
 
 .list-btn {

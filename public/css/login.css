@@ -10,7 +10,7 @@
 #login-container {
   flex-direction: column;
   height: 100vh;
-  background-color: #060738;
+  background-color: #17131e;
 }
 
 #login-form,
@@ -22,7 +22,7 @@
 }
 
 #login-btn-entrar {
-  margin-top: 0;
+  width: 100%;
 }
 
 .login-form-floating {

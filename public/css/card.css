@@ -1,5 +1,6 @@
 .home-card {
   margin-right: 1rem;
+  background-color: #22232d;
 }
 
 .home-card-title {
@@ -12,6 +13,12 @@
 .home-card-text {
   height: 320px;
   overflow: auto;
+}
+
+.home-card-title,
+.home-card-text {
+  color: #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
 }
 
 .home-btn {

@@ -1,5 +1,12 @@
 #assessments-body {
-  background-color: #060738;
+  background-color: #17131e;
+  text-align: center;
+}
+
+#assessments-body h2 {
+  color: #ffffff;
+  padding: 2% 0;
+  border-bottom: 1px solid #ffffff;
 }
 
 #assessments-container {
@@ -9,7 +16,7 @@
   min-height: 80vh;
   flex-wrap: wrap;
   gap: 2%;
-  margin-top: 4%;
+  margin-top: 2%;
 }
 
 #assessments-text {
@@ -19,6 +26,7 @@
 .assessments-card {
   width: 18rem;
   margin-bottom: 2%;
+  background-color: #22232d;
 }
 
 .assessments-card-title {
@@ -27,6 +35,13 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: white;
+}
+
+.liked-or-not {
+  color: white;
+  border: 1px solid #ffffff;
+  padding: 2% 0;
 }
 
 .assessments-btn {

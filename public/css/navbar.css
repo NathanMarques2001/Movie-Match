@@ -1,3 +1,16 @@
 .nav-item {
-  padding-right: 20%;
+  padding: 8% 12%;
+  border-radius: 8px;
+}
+
+.navbar {
+  background-color: #232431;
+}
+
+.link-navbar {
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background-color: #13938b;
 }

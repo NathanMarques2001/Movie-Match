@@ -1,17 +1,19 @@
 #films-container {
   width: 100%;
   text-align: center;
-  background-color: #062138;
+  background-color: #17131e;
 }
 
-#films-container h1 {
+#films-container h2 {
   color: #ffffff;
-  padding: 4% 0 3% 0;
+  padding: 2% 0;
+  border-bottom: 1px solid #ffffff;
 }
 
 #films-slider {
   display: flex;
   align-items: center;
+  padding-top: 2%;
 }
 
 .btn-slider {

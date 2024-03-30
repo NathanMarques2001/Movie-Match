@@ -3,7 +3,7 @@
 
 <body>
   <div id="films-container">
-    <h1>Recomendações de Filmes</h1>
+    <h2>Recomendações Sob Medida</h2>
     <main id="films-slider">
       <?php foreach ($list as $film) : ?>
         <div class="card home-card">
