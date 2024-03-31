@@ -71,6 +71,16 @@ Inicie o servidor e acesse o projeto através do navegador.
 
 **views/:** Arquivos de visualização HTML/PHP.
 
+# Tecnologias ⚙️
+
+- HTML, CSS JavaScript
+- PHP 8.3.1
+- Apache 2.4.58
+- MySQL 8.2.0
+- PHP Unit 10.5.2
+
+**views/:** Arquivos de visualização HTML/PHP.
+
 # Requisitos do Sistema 🖥️
 
 - PHP 7.0 ou superior.
