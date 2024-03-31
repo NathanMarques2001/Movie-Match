@@ -15,8 +15,10 @@ class Session
   {
     if (isset($_SESSION)) {
       session_destroy();
+      $_SESSION = null;
     }
   }
+
 
   public function get(string $key)
   {
