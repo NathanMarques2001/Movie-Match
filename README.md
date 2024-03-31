@@ -82,19 +82,19 @@ Inicie o servidor e acesse o projeto através do navegador.
 Aqui estão algumas capturas de tela das telas principais do sistema:
 
 1. **Tela de Login:**
-   ![Tela de Login](./readme-assets/login.png)
+   ![Tela de Login](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/login.png)
 
 2. **Tela de Cadastro:**
-   ![Tela de Cadastro](./readme-assets/signup.png)
+   ![Tela de Cadastro](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/signup.png)
 
 3. **Avaliação de Gêneros - Primeiro Acesso:**
-   ![Avaliação de Gêneros](./readme-assets/modal.png)
+   ![Avaliação de Gêneros](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/modal.png)
 
 4. **Página Principal - Recomendações Personalizadas:**
-   ![Página Principal](./readme-assets/home.png)
+   ![Página Principal](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/home.png)
 
 5. **Lista de Filmes:**
-   ![Lista de Filmes](./readme-assets/list.png)
+   ![Lista de Filmes](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/list.png)
 
 6. **Filmes Avaliados:**
    ![Filmes Avaliados](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/assessments.png)
