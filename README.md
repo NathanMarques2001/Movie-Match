@@ -2,7 +2,7 @@
 
 Este projeto, é um sistema de recomendação de filmes baseado nas preferências e avaliações do usuário. Ele utiliza uma combinação de avaliações de gêneros e Processamento de Linguagem Natural (NLP) para oferecer recomendações personalizadas.
 
-# Principais Funcionalidades
+# Principais Funcionalidades 🎯
 - Avaliação de Gêneros:
 
 Os usuários podem avaliar diferentes gêneros de filmes, indicando suas preferências.
@@ -27,7 +27,7 @@ As recomendações são classificadas com base nas avaliações do usuário e na
 
 As recomendações personalizadas são exibidas ao usuário, considerando suas avaliações e as recomendações geradas pelo sistema.
 
-# Arquitetura do Projeto
+# Arquitetura do Projeto 🏗️
 O projeto é composto pela arquitetura MVC e alguns módulos:
 
 1. Models: Modelos que representam entidades como usuários, filmes, gêneros, etc.
@@ -38,7 +38,7 @@ O projeto é composto pela arquitetura MVC e alguns módulos:
 
 4. Config: Configurações e utilitários para o funcionamento do sistema.
 
-# Como Rodar o Projeto
+# Como Rodar o Projeto 🏃
 
 - Configuração do Ambiente:
 
@@ -61,7 +61,7 @@ Crie um arquivo .env na raiz do projeto com as variáveis necessárias, como a c
 
 Inicie o servidor e acesse o projeto através do navegador.
 
-# Estrutura do Projeto
+# Estrutura do Projeto 📂
 
 **public/:** Contém os arquivos acessíveis publicamente, como imagens e estilos.
 
@@ -71,13 +71,13 @@ Inicie o servidor e acesse o projeto através do navegador.
 
 **views/:** Arquivos de visualização HTML/PHP.
 
-# Requisitos do Sistema
+# Requisitos do Sistema 🖥️
 
 - PHP 7.0 ou superior.
 - Composer instalado.
 - Servidor web configurado.
 
-# Telas do Sistema
+# Telas do Sistema 📱
 
 Aqui estão algumas capturas de tela das telas principais do sistema:
 
@@ -99,4 +99,4 @@ Aqui estão algumas capturas de tela das telas principais do sistema:
 6. **Filmes Avaliados:**
    ![Filmes Avaliados](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/assessments.png)
 
-# Contato
+# Contato ✉️
