@@ -1,31 +1,25 @@
 # Movie Match 🎬
 
-Este projeto, é um sistema de recomendação de filmes baseado nas preferências e avaliações do usuário. Ele utiliza uma combinação de avaliações de gêneros e Processamento de Linguagem Natural (NLP) para oferecer recomendações personalizadas.
+Este projeto é um sistema de recomendação de filmes baseado nas preferências e avaliações do usuário. Ele utiliza uma combinação de avaliações de gêneros e Processamento de Linguagem Natural (NLP) para oferecer recomendações personalizadas.
 
 # Principais Funcionalidades 🎯
 - Avaliação de Gêneros:
-
-Os usuários podem avaliar diferentes gêneros de filmes, indicando suas preferências.
+  Os usuários podem avaliar diferentes gêneros de filmes, indicando suas preferências.
 
 - Processamento de Avaliações:
-
-As avaliações dos usuários são processadas e armazenadas no sistema.
+  As avaliações dos usuários são processadas e armazenadas no sistema.
 
 - Recomendações Sem NLP:
-
-Com base nas avaliações de gêneros, o sistema gera uma lista inicial de recomendações sem usar NLP.
+  Com base nas avaliações de gêneros, o sistema gera uma lista inicial de recomendações sem usar NLP.
 
 - Recomendações Com NLP:
-
-Se o usuário já avaliou alguns filmes, o sistema utiliza NLP para calcular a similaridade entre sinopses de filmes avaliados e não avaliados.
+  Se o usuário já avaliou alguns filmes, o sistema utiliza NLP para calcular a similaridade entre sinopses de filmes avaliados e não avaliados.
 
 - Classificação de Recomendações:
-
-As recomendações são classificadas com base nas avaliações do usuário e na similaridade calculada pelo NLP.
+  As recomendações são classificadas com base nas avaliações do usuário e na similaridade calculada pelo NLP.
 
 - Exibição de Recomendações Personalizadas:
-
-As recomendações personalizadas são exibidas ao usuário, considerando suas avaliações e as recomendações geradas pelo sistema.
+  As recomendações personalizadas são exibidas ao usuário, considerando suas avaliações e as recomendações geradas pelo sistema.
 
 # Arquitetura do Projeto 🏗️
 O projeto é composto pela arquitetura MVC e alguns módulos:
@@ -41,25 +35,20 @@ O projeto é composto pela arquitetura MVC e alguns módulos:
 # Como Rodar o Projeto 🏃
 
 - Configuração do Ambiente:
-
-Configure um servidor web para hospedar o projeto.
-Certifique-se de ter o PHP instalado.
+  Configure um servidor web para hospedar o projeto.
+  Certifique-se de ter o PHP instalado.
 
 - Banco de Dados:
-
-Configure as informações do banco de dados no arquivo config/database.php.
+  Configure as informações do banco de dados no arquivo config/database.php.
 
 - Composer:
-
-Execute composer install para instalar as dependências.
+  Execute `composer install` para instalar as dependências.
 
 - Variáveis de Ambiente:
-
-Crie um arquivo .env na raiz do projeto com as variáveis necessárias, como a chave da API do TMDB.
+  Crie um arquivo .env na raiz do projeto com as variáveis necessárias, como a chave da API do TMDB.
 
 - Execução:
-
-Inicie o servidor e acesse o projeto através do navegador.
+  Inicie o servidor e acesse o projeto através do navegador.
 
 # Estrutura do Projeto 📂
 
@@ -67,25 +56,30 @@ Inicie o servidor e acesse o projeto através do navegador.
 
 **src/:** Código-fonte PHP do projeto.
 
+**config/:** Contém o arquivo de router, que faz o redirecionamento do usuário.
+
+**templates/:** Arquivos de visualização HTML/PHP.
+
+**testes/:** Arquivos de testes unitários.
+
+**utils/:** Arquivos que auxiliam o funcionamento da aplicação.
+
 **vendor/:** Dependências do Composer.
 
-**views/:** Arquivos de visualização HTML/PHP.
-
-# Tecnologias ⚙️
+# Tecnologias Utilizadas ⚙️
 
 - HTML, CSS JavaScript
 - PHP 8.3.1
 - Apache 2.4.58
 - MySQL 8.2.0
-- PHP Unit 10.5.2
-
-**views/:** Arquivos de visualização HTML/PHP.
+- PHPUnit 10.5.2
 
 # Requisitos do Sistema 🖥️
 
-- PHP 7.0 ou superior.
+- PHP 8.0 ou superior.
 - Composer instalado.
-- Servidor web configurado.
+- Servidor web Apache configurado.
+- MySQL instalado.
 
 # Telas do Sistema 📱
 
@@ -110,3 +104,4 @@ Aqui estão algumas capturas de tela das telas principais do sistema:
    ![Filmes Avaliados](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/assessments.png)
 
 # Contato ✉️
+### nathanbrandao1@gmail.com
