@@ -1,4 +1,4 @@
-# Movie Match
+# Movie Match 🎬
 
 Este projeto, é um sistema de recomendação de filmes baseado nas preferências e avaliações do usuário. Ele utiliza uma combinação de avaliações de gêneros e Processamento de Linguagem Natural (NLP) para oferecer recomendações personalizadas.
 
