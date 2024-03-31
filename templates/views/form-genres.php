@@ -3,7 +3,7 @@
 <?php require_once __DIR__ . "/../../utils/translateGenres.php"; ?>
 
 <div id="modalGenre-container">
-  <h1 id="modalGenre-title">Avalie os gêneros abaixo para prosseguir</h1>
+  <h2 id="modalGenre-title">Avalie os gêneros abaixo para prosseguir</h2>
   <form action="http://moviematch.com/first-login" method="POST" id="modalGenre-form">
     <?php foreach ($genres as $genre) : ?>
       <div id="modalGenre-form-div">
