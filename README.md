@@ -97,6 +97,6 @@ Aqui estão algumas capturas de tela das telas principais do sistema:
    ![Lista de Filmes](./readme-assets/list.png)
 
 6. **Filmes Avaliados:**
-   ![Filmes Avaliados](./readme-assets/assessments.png)
+   ![Filmes Avaliados](https://github.com/NathanMarques2001/Movie-Match/blob/main/redme-assets/assessments.png)
 
 # Contato
